@@ -60,10 +60,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_17_161440) do
     t.integer "nb_rooms_per_dwelling"
     t.string "energy_class"
     t.bigint "city_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "project_id"
-    t.bigint "user_id"
     t.index ["city_id"], name: "index_properties_on_city_id"
     t.index ["project_id"], name: "index_properties_on_project_id"
     t.index ["user_id"], name: "index_properties_on_user_id"
