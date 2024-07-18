@@ -62,11 +62,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_18_105406) do
     t.integer "nb_rooms_per_dwelling"
     t.string "energy_class"
     t.bigint "city_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "project_id"
+<<<<<<< HEAD
+=======
     t.float "latitude"
     t.float "longitude"
+>>>>>>> 581a4b8eac1d0af74ac2f23fbf26137c34fb61c8
     t.index ["city_id"], name: "index_properties_on_city_id"
     t.index ["project_id"], name: "index_properties_on_project_id"
   end
