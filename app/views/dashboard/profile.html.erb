@@ -1,20 +1,26 @@
 <h1>Dashboard</h1>
-<h2>Mes projets</h2>
-<% @projects.each do |project| %>
-  <h3><%= project.project_name %></h3>
-  <ul>
-    <li><%= project.nb_dweling %></li>
-    <li><%= project.area_sqm_land %></li>
-    <li><%= project.area_sqm_livable %></li>
-    <li><%= project.floor_area_ratio %></li>
-  </ul>
-<% end %>
-<h2>Mes Propriétes</h2>
-  <% @properties.each do |property| %>
-    <h3><%= property.address %></h3>
+<div>
+  <h2>Mes projets</h2>
+  <% @projects.each do |project| %>
+    <h3><%= project.project_name %></h3>
     <ul>
-      <li><%= property.nb_dweling %></li>
-      <li><%= property.area_sqm_land %></li>
-      <li><%= property.area_sqm_livable %></li>
-      <li><%= property.floor_area_ratio %></li>
+      <li><%= project.nb_dweling %></li>
+      <li><%= project.area_sqm_land %></li>
+      <li><%= project.area_sqm_livable %></li>
+      <li><%= project.floor_area_ratio %></li>
     </ul>
+    <%= link_to 'Accéder au détail', project_path(project), class: 'btn btn-secondary'%>
+  <% end %>
+</div>
+<div>
+  <h2>Mes Propriétes</h2>
+    <% @properties.each do |property| %>
+      <h3><%= property.address %></h3>
+      <ul>
+        <li><%= property.nb_dweling %></li>
+        <li><%= property.area_sqm_land %></li>
+        <li><%= property.area_sqm_livable %></li>
+        <li><%= property.floor_area_ratio %></li>
+      </ul>
+    <% end %>
+</div>
