@@ -16,7 +16,7 @@ class CreateProperties < ActiveRecord::Migration[7.1]
       t.integer :nb_rooms_per_dwelling
       t.string :energy_class
       t.references :city, null: false, foreign_key: true
-      t.references :user, null: false, foreign_key: true
+
 
       t.timestamps
     end
