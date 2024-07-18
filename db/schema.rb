@@ -41,9 +41,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_18_105406) do
     t.float "floor_area_ratio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
     t.string "project_name"
-    t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
   create_table "properties", force: :cascade do |t|
@@ -62,6 +60,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_18_105406) do
     t.integer "nb_rooms_per_dwelling"
     t.string "energy_class"
     t.bigint "city_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "project_id"
@@ -69,6 +68,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_18_105406) do
     t.float "longitude"
     t.index ["city_id"], name: "index_properties_on_city_id"
     t.index ["project_id"], name: "index_properties_on_project_id"
+    t.index ["user_id"], name: "index_properties_on_user_id"
   end
 
   create_table "regulations", force: :cascade do |t|
@@ -123,9 +123,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_18_105406) do
   end
 
   add_foreign_key "leads", "simulations"
-  add_foreign_key "projects", "users"
   add_foreign_key "properties", "cities"
   add_foreign_key "properties", "projects"
+  add_foreign_key "properties", "users"
   add_foreign_key "regulations", "cities"
   add_foreign_key "simulations", "projects"
 end
