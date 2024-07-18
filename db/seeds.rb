@@ -1,21 +1,17 @@
 # This file should ensure the existence of records required to run the application in every environment (production,
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# Ensure the correct order of deletion to avoid foreign key violations
 
+# Ensure the correct order of deletion to avoid foreign key violations
 Regulation.destroy_all
 Property.destroy_all
+Project.destroy_all
 User.destroy_all
 City.destroy_all
 
 # Seed data for cities
-# Seed data for cities
-cities = City.create([
+cities = City.create!([
   {
     city_name: 'Vannes',
     price_per_sqm_livable: 3815,
@@ -30,8 +26,58 @@ cities = City.create([
   }
 ])
 
-# Seed data for properties
-Property.create([
+# Seed data for users
+users = User.create!([
+  {
+    email: 'valentin.corger@gmail.com',
+    password: 'password123', # Devise will handle encryption
+    first_name: 'Valentin',
+    last_name: 'CORGER',
+    phone_number: '06 87 35 41 23',
+    marital_status: 'single',
+    ownership_status: 'owner',
+    postal_address: '55 avenue de la Marne, 56000 Vannes',
+    reset_password_token: nil,
+    reset_password_sent_at: nil,
+    remember_created_at: nil
+  },
+  {
+    email: 'xuanhuyle@gmail.com',
+    password: 'password123', # Devise will handle encryption
+    first_name: 'Xuân Huy',
+    last_name: 'LÊ de NARP',
+    phone_number: '06 87 35 41 23',
+    marital_status: 'married',
+    ownership_status: 'owner',
+    postal_address: '85 avenue Paul Vaillant-couturier, 94800 Villejuif',
+    reset_password_token: nil,
+    reset_password_sent_at: nil,
+    remember_created_at: nil
+  }
+])
+
+# Seed data for projects
+projects = Project.create!([
+  {
+    nb_dweling: 1,
+    area_sqm_land: 516,
+    area_sqm_livable: 147,
+    floor_area_ratio: 0.23,
+    user_id: users.first.id,
+    project_name: 'Project in Vannes'
+  },
+  {
+    nb_dweling: 5,
+    area_sqm_land: 1082,
+    area_sqm_livable: 318,
+    floor_area_ratio: 0.45,
+    user_id: users.second.id,
+    project_name: 'Project in Villejuif'
+  }
+])
+
+# Seed data for properties without associating with projects
+properties_vannes = Property.create!([
   {
     city_id: cities[0].id,
     street_number: 55,
@@ -47,10 +93,13 @@ Property.create([
     building_height_floors: 2,
     nb_rooms_per_dwelling: 4,
     energy_class: 'G',
-    project_id: nil,
+    project_id: projects[0].id,
     latitude: nil,
     longitude: nil
-  },
+  }
+])
+
+properties_villejuif = Property.create!([
   {
     city_id: cities[1].id,
     street_number: 87,
@@ -66,7 +115,7 @@ Property.create([
     building_height_floors: 3,
     nb_rooms_per_dwelling: 6,
     energy_class: 'G',
-    project_id: nil,
+    project_id: projects[1].id,
     latitude: nil,
     longitude: nil
   },
@@ -85,7 +134,7 @@ Property.create([
     building_height_floors: 2,
     nb_rooms_per_dwelling: 4,
     energy_class: 'G',
-    project_id: nil,
+    project_id: projects[1].id,
     latitude: nil,
     longitude: nil
   },
@@ -104,7 +153,7 @@ Property.create([
     building_height_floors: nil,
     nb_rooms_per_dwelling: nil,
     energy_class: 'G',
-    project_id: nil,
+    project_id: projects[1].id,
     latitude: nil,
     longitude: nil
   },
@@ -123,16 +172,17 @@ Property.create([
     building_height_floors: 1,
     nb_rooms_per_dwelling: 2,
     energy_class: 'G',
-    project_id: nil,
+    project_id: projects[1].id,
     latitude: nil,
     longitude: nil
   }
 ])
 
 # Seed data for regulations
-Regulation.create([
+Regulation.create!([
   {
     city_id: cities[0].id,
+    city_name: 'Vannes',
     floor_area_ratio: 0.40,
     building_height: 3,
     housing_social: 0.20,
@@ -141,6 +191,7 @@ Regulation.create([
   },
   {
     city_id: cities[1].id,
+    city_name: 'Villejuif',
     floor_area_ratio: 0.50,
     building_height: 5,
     housing_social: 0.30,
@@ -149,34 +200,4 @@ Regulation.create([
   }
 ])
 
-# Seed data for users
-User.create([
-  {
-    email: 'valentin.corger@gmail.com',
-    encrypted_password: 'password123', # Normally you would use Devise to generate this
-    first_name: 'Valentin',
-    last_name: 'CORGER',
-    phone_number: '06 87 35 41 23',
-    marital_status: 'single',
-    ownership_status: 'owner',
-    postal_address: '55 avenue de la Marne, 56000 Vannes',
-    reset_password_token: nil,
-    reset_password_sent_at: nil,
-    remember_created_at: nil
-  },
-  {
-    email: 'xuanhuyle@gmail.com',
-    encrypted_password: 'password123', # Normally you would use Devise to generate this
-    first_name: 'Xuân Huy',
-    last_name: 'LÊ de NARP',
-    phone_number: '06 87 35 41 23',
-    marital_status: 'married',
-    ownership_status: 'owner',
-    postal_address: '85 avenue Paul Vaillant-couturier, 94800 Villejuif',
-    reset_password_token: nil,
-    reset_password_sent_at: nil,
-    remember_created_at: nil
-  }
-])
-
-puts "Cities, Properties, Regulations, and Users seeded successfully!"
+puts "Cities, Properties, Regulations, Projects, and Users seeded successfully!"
