@@ -1,18 +1,4 @@
 Rails.application.routes.draw do
-  get 'projects/new'
-  get 'projects/create'
-  get 'projects/show'
-  get 'properties/search'
-  get 'properties/new'
-  get 'properties/create'
-  get 'leads/new'
-  get 'leads/create'
-  get 'simulations/index'
-  get 'simulations/create'
-  get 'simulations/new'
-  get 'simulations/edit'
-  get 'simulations/update'
-  get 'simulations/destroy'
   devise_for :users
 
   root to: "pages#home"
@@ -22,6 +8,9 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
+resources :properties, only: [:index, :show, :new, :create, :edit, :update]
+
+
   resources :projects, only: [:show, :new, :create] do
     resources :simulations, only: [:new, :create]
   end
@@ -29,7 +18,6 @@ Rails.application.routes.draw do
 
   get "dashboard", to: "dashboard#profile"
 
-  get "properties/search", to: "properties#search"
 
   resources :simulations, only: [:show] do
     resources :leads, only: [:new, :create]
