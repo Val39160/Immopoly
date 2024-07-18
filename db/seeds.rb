@@ -8,8 +8,14 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+Regulation.destroy_all
+Property.destroy_all
+User.destroy_all
+City.destroy_all
+
 # Seed data for cities
-City.create([
+# Seed data for cities
+cities = City.create([
   {
     city_name: 'Vannes',
     price_per_sqm_livable: 3815,
@@ -27,14 +33,14 @@ City.create([
 # Seed data for properties
 Property.create([
   {
-    city_id: 1,
+    city_id: cities[0].id,
     street_number: 55,
     street_name: 'Avenue de la Marne',
     zipcode: 56000,
     nb_dwelling: 1,
     area_sqm_land: 516,
     area_sqm_livable: 147,
-    floor_area_ratio: 0.23, # Assuming percentage is converted to a float
+    floor_area_ratio: 0.23,
     year_construction: 1945,
     building_zone: 'residential',
     density_area: 'mid',
@@ -46,14 +52,14 @@ Property.create([
     longitude: nil
   },
   {
-    city_id: 2,
+    city_id: cities[1].id,
     street_number: 87,
     street_name: 'Avenue Paul Vaillant-couturier',
     zipcode: 94800,
     nb_dwelling: 3,
     area_sqm_land: 325,
     area_sqm_livable: 150,
-    floor_area_ratio: 0.77, # Assuming percentage is converted to a float
+    floor_area_ratio: 0.77,
     year_construction: 1945,
     building_zone: 'residential',
     density_area: 'mid',
@@ -65,14 +71,14 @@ Property.create([
     longitude: nil
   },
   {
-    city_id: 2,
+    city_id: cities[1].id,
     street_number: 85,
     street_name: 'Avenue Paul Vaillant-couturier',
     zipcode: 94800,
     nb_dwelling: 1,
     area_sqm_land: 253,
     area_sqm_livable: 90,
-    floor_area_ratio: 0.58, # Assuming percentage is converted to a float
+    floor_area_ratio: 0.58,
     year_construction: 1945,
     building_zone: 'residential',
     density_area: 'mid',
@@ -84,33 +90,33 @@ Property.create([
     longitude: nil
   },
   {
-    city_id: 2,
+    city_id: cities[1].id,
     street_number: 83,
     street_name: 'Avenue Paul Vaillant-couturier',
     zipcode: 94800,
-    nb_dwelling: nil,  # Assuming missing value
+    nb_dwelling: nil,
     area_sqm_land: 252,
-    area_sqm_livable: nil,  # Assuming missing value
-    floor_area_ratio: 0.20, # Assuming percentage is converted to a float
+    area_sqm_livable: nil,
+    floor_area_ratio: 0.20,
     year_construction: 1945,
     building_zone: 'residential',
     density_area: 'mid',
-    building_height_floors: nil,  # Assuming missing value
-    nb_rooms_per_dwelling: nil,  # Assuming missing value
+    building_height_floors: nil,
+    nb_rooms_per_dwelling: nil,
     energy_class: 'G',
     project_id: nil,
     latitude: nil,
     longitude: nil
   },
   {
-    city_id: 2,
+    city_id: cities[1].id,
     street_number: 4,
     street_name: 'Rue Griffuelhes',
     zipcode: 94800,
     nb_dwelling: 1,
     area_sqm_land: 252,
     area_sqm_livable: 78,
-    floor_area_ratio: 0.15, # Assuming percentage is converted to a float
+    floor_area_ratio: 0.15,
     year_construction: 1945,
     building_zone: 'residential',
     density_area: 'mid',
@@ -126,21 +132,51 @@ Property.create([
 # Seed data for regulations
 Regulation.create([
   {
-    city_id: 1,
-    floor_area_ratio: 0.40, # Assuming percentage is converted to a float
+    city_id: cities[0].id,
+    floor_area_ratio: 0.40,
     building_height: 3,
-    housing_social: 0.20, # Assuming percentage is converted to a float
-    housing_affordable: nil, # Assuming missing value
-    housing_market_rate: 0.80 # Assuming percentage is converted to a float
+    housing_social: 0.20,
+    housing_affordable: nil,
+    housing_market_rate: 0.80
   },
   {
-    city_id: 2,
-    floor_area_ratio: 0.50, # Assuming percentage is converted to a float
+    city_id: cities[1].id,
+    floor_area_ratio: 0.50,
     building_height: 5,
-    housing_social: 0.30, # Assuming percentage is converted to a float
-    housing_affordable: nil, # Assuming missing value
-    housing_market_rate: 0.70 # Assuming percentage is converted to a float
+    housing_social: 0.30,
+    housing_affordable: nil,
+    housing_market_rate: 0.70
   }
 ])
 
-puts "Cities, Properties, and Regulations seeded successfully!"
+# Seed data for users
+User.create([
+  {
+    email: 'valentin.corger@gmail.com',
+    encrypted_password: 'password123', # Normally you would use Devise to generate this
+    first_name: 'Valentin',
+    last_name: 'CORGER',
+    phone_number: '06 87 35 41 23',
+    marital_status: 'single',
+    ownership_status: 'owner',
+    postal_address: '55 avenue de la Marne, 56000 Vannes',
+    reset_password_token: nil,
+    reset_password_sent_at: nil,
+    remember_created_at: nil
+  },
+  {
+    email: 'xuanhuyle@gmail.com',
+    encrypted_password: 'password123', # Normally you would use Devise to generate this
+    first_name: 'Xuân Huy',
+    last_name: 'LÊ de NARP',
+    phone_number: '06 87 35 41 23',
+    marital_status: 'married',
+    ownership_status: 'owner',
+    postal_address: '85 avenue Paul Vaillant-couturier, 94800 Villejuif',
+    reset_password_token: nil,
+    reset_password_sent_at: nil,
+    remember_created_at: nil
+  }
+])
+
+puts "Cities, Properties, Regulations, and Users seeded successfully!"
