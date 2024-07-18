@@ -1,0 +1,26 @@
+<h1>Mes addresses</h1>
+
+<div class="container">
+
+  <div class = "addresses-index-card">
+    <% @properties.each do |propertie| %>
+      <div class="card w-75 mb-3">
+      <div class="card-body">
+        <h5 class="card-title"><%=propertie.address%></h5>
+        <p class="card-text"><%=propertie.area_sqm_land%> m2</p>
+      </div>
+    </div>
+    <% end %>
+  </div>
+
+  <div id = "home-map" style="width: 40%; height: 600px; align-items: center; margin: auto; border-radius: 10px;"
+    data-controller="map"
+    data-map-markers-value="<%= @markers.to_json %>"
+    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+  </div>
+
+
+
+
+  <%= link_to 'Creer un projet', new_project_path, class: 'link' %>
+</div>

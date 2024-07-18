@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_17_161440) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_18_105406) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,7 +41,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_17_161440) do
     t.float "floor_area_ratio"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
     t.string "project_name"
+    t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
   create_table "properties", force: :cascade do |t|
@@ -64,9 +66,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_17_161440) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "project_id"
+<<<<<<< HEAD
+=======
+    t.float "latitude"
+    t.float "longitude"
+>>>>>>> 581a4b8eac1d0af74ac2f23fbf26137c34fb61c8
     t.index ["city_id"], name: "index_properties_on_city_id"
     t.index ["project_id"], name: "index_properties_on_project_id"
-    t.index ["user_id"], name: "index_properties_on_user_id"
   end
 
   create_table "regulations", force: :cascade do |t|
@@ -121,9 +127,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_17_161440) do
   end
 
   add_foreign_key "leads", "simulations"
+  add_foreign_key "projects", "users"
   add_foreign_key "properties", "cities"
   add_foreign_key "properties", "projects"
-  add_foreign_key "properties", "users"
   add_foreign_key "regulations", "cities"
   add_foreign_key "simulations", "projects"
 end
