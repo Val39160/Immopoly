@@ -1,2 +1,72 @@
-<h1>Projects#show</h1>
-<p>Find me in app/views/projects/show.html.erb</p>
+<!-- app/views/projects/show.html.erb -->
+
+<div class="container">
+  <div class="row">
+    <!-- Section 1: Summary of Applicable Regulations -->
+    <div class="col-md-6">
+      <h2>Résumé des Réglementations Applicables</h2>
+      <div id="regulations-summary">
+        <% if @regulations.present? %>
+          <% @regulations.each do |regulation| %>
+            <p>Coefficient d'Occupation des Sols (COS) : <%= regulation.floor_area_ratio %></p>
+            <p>Hauteur des Bâtiments : <%= regulation.building_height %> étages</p>
+            <p>Logements Sociaux : <%= regulation.housing_social %></p>
+            <p>Logements Abordables : <%= regulation.housing_affordable %></p>
+            <p>Logements à Prix de Marché : <%= regulation.housing_market_rate %></p>
+          <% end %>
+        <% else %>
+          <p>Aucune réglementation disponible pour cette ville.</p>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Section 2: City Data -->
+    <div class="col-md-6">
+      <h2>Données de la Ville</h2>
+      <div id="city-data">
+        <% if @city.present? %>
+          <p>Nom de la Ville : <%= @city.city_name %></p>
+          <p>Prix au m² Habitable : <%= @city.price_per_sqm_livable %></p>
+          <p>Prix au m² de Terrain : <%= @city.price_per_sqm_land %></p>
+          <p>Prix au m² Locatif : <%= @city.price_per_sqm_rental %></p>
+        <% else %>
+          <p>Aucune donnée disponible pour cette ville.</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <!-- Section 3: Properties List -->
+    <div class="col-md-6">
+      <h2>Propriétés dans le Projet</h2>
+      <div id="properties-list">
+        <% if @properties.present? %>
+          <ul>
+            <% @properties.each do |property| %>
+              <li><%= property.street_name %>, <%= property.street_number %></li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p>Aucune propriété disponible pour ce projet.</p>
+        <% end %>
+      </div>
+    </div>
+
+    <!-- Section 4: Input for Costs -->
+    <div class="col-md-6">
+      <h2>Coûts du Projet</h2>
+      <%= form_with(model: @project, url: project_path(@project), method: :patch) do |form| %>
+        <div class="mb-3">
+          <%= form.label :demolition_cost, "Coût de Démolition" %>
+          <%= form.number_field :demolition_cost, class: "form-control" %>
+        </div>
+        <div class="mb-3">
+          <%= form.label :construction_cost, "Coût de Construction" %>
+          <%= form.number_field :construction_cost, class: "form-control" %>
+        </div>
+        <%= form.submit "Enregistrer les Coûts", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
