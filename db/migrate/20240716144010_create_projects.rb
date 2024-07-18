@@ -5,7 +5,7 @@ class CreateProjects < ActiveRecord::Migration[7.1]
       t.float :area_sqm_land
       t.float :area_sqm_livable
       t.float :floor_area_ratio
-
+      t.references :user, null: false, foreign_key: true
       t.timestamps
     end
   end
