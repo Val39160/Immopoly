@@ -1,1 +1,34 @@
 // Specific CSS for your home-page
+.banner {
+  background-size: cover;
+  background-position: center;
+  padding: 225px 0;
+  height: 650px;
+}
+
+.headline {
+  font-size: 50px;
+  font-weight: 700;
+  color: #27CE8D;
+  padding-bottom: 20px;
+}
+
+#container {
+  margin-left: 50px;
+}
+
+.btn {
+  background: none;
+  position: absolute;
+  left: 473px;
+}
+
+.search-bar {
+  position: relative;
+  display: flex;
+  width: 540px;
+}
+
+.form-control {
+  border-radius: 30px;
+}

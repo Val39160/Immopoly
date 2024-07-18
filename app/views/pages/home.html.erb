@@ -1,2 +1,17 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://cdn.mos.cms.futurecdn.net/MNi7KjdM9nP5DcVMFAEuHQ.jpg);">
+  <div id="container" class="col-sm-8 my-3">
+    <h1 class="headline">Libérez votre potentiel.</h1>
+    <%= form_with url: new_property_path, method: :get, class: "d-flex" do %>
+      <div class="search-bar">
+        <%= text_field_tag :query,
+              params[:query],
+              class: "form-control",
+              placeholder: "Entrez l’adresse de votre propriété"
+          %>
+        <%= button_tag(type: 'Submit', class: "btn") do %>
+          <i class="fa-solid fa-magnifying-glass" style="color: #27CE8D;"></i>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

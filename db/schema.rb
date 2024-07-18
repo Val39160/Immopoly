@@ -39,6 +39,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_18_105406) do
     t.float "area_sqm_land"
     t.float "area_sqm_livable"
     t.float "floor_area_ratio"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "project_name"
