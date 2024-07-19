@@ -49,7 +49,7 @@ users = User.create!([
     phone_number: '06 87 35 41 23',
     marital_status: 'married',
     ownership_status: 'owner',
-    postal_address: '85 avenue Paul Vaillant-couturier, 94800 Villejuif',
+    postal_address: '85 avenue Paul Vaillant-Couturier, 94800 Villejuif',
     reset_password_token: nil,
     reset_password_sent_at: nil,
     remember_created_at: nil
