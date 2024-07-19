@@ -49,7 +49,7 @@ users = User.create!([
     phone_number: '06 87 35 41 23',
     marital_status: 'married',
     ownership_status: 'owner',
-    postal_address: '85 avenue Paul Vaillant-couturier, 94800 Villejuif',
+    postal_address: '85 avenue Paul Vaillant-Couturier, 94800 Villejuif',
     reset_password_token: nil,
     reset_password_sent_at: nil,
     remember_created_at: nil
@@ -59,7 +59,7 @@ users = User.create!([
 # Seed data for projects
 projects = Project.create!([
   {
-    nb_dweling: 1,
+    nb_dwelling: 1,
     area_sqm_land: 516,
     area_sqm_livable: 147,
     floor_area_ratio: 0.23,
@@ -67,7 +67,7 @@ projects = Project.create!([
     project_name: 'Project in Vannes'
   },
   {
-    nb_dweling: 5,
+    nb_dwelling: 5,
     area_sqm_land: 1082,
     area_sqm_livable: 318,
     floor_area_ratio: 0.45,
@@ -80,6 +80,7 @@ projects = Project.create!([
 properties_vannes = Property.create!([
   {
     city_id: cities[0].id,
+    address: '55 avenue de la Marne, 56000 Vannes',
     street_number: 55,
     street_name: 'Avenue de la Marne',
     zipcode: 56000,
@@ -93,17 +94,16 @@ properties_vannes = Property.create!([
     building_height_floors: 2,
     nb_rooms_per_dwelling: 4,
     energy_class: 'G',
-    project_id: projects[0].id,
-    latitude: nil,
-    longitude: nil
+    project_id: projects[0].id
   }
 ])
 
 properties_villejuif = Property.create!([
   {
     city_id: cities[1].id,
+    address: '87 avenue Paul Vaillant-Couturier, 94800 Villejuif',
     street_number: 87,
-    street_name: 'Avenue Paul Vaillant-couturier',
+    street_name: 'Avenue Paul Vaillant-Couturier',
     zipcode: 94800,
     nb_dwelling: 3,
     area_sqm_land: 325,
@@ -115,14 +115,13 @@ properties_villejuif = Property.create!([
     building_height_floors: 3,
     nb_rooms_per_dwelling: 6,
     energy_class: 'G',
-    project_id: projects[1].id,
-    latitude: nil,
-    longitude: nil
+    project_id: projects[1].id
   },
   {
     city_id: cities[1].id,
+    address: '85 avenue Paul Vaillant-Couturier, 94800 Villejuif',
     street_number: 85,
-    street_name: 'Avenue Paul Vaillant-couturier',
+    street_name: 'Avenue Paul Vaillant-Couturier',
     zipcode: 94800,
     nb_dwelling: 1,
     area_sqm_land: 253,
@@ -134,14 +133,13 @@ properties_villejuif = Property.create!([
     building_height_floors: 2,
     nb_rooms_per_dwelling: 4,
     energy_class: 'G',
-    project_id: projects[1].id,
-    latitude: nil,
-    longitude: nil
+    project_id: projects[1].id
   },
   {
     city_id: cities[1].id,
+    address: '83 avenue Paul Vaillant-Couturier, 94800 Villejuif',
     street_number: 83,
-    street_name: 'Avenue Paul Vaillant-couturier',
+    street_name: 'Avenue Paul Vaillant-Couturier',
     zipcode: 94800,
     nb_dwelling: nil,
     area_sqm_land: 252,
@@ -154,11 +152,10 @@ properties_villejuif = Property.create!([
     nb_rooms_per_dwelling: nil,
     energy_class: 'G',
     project_id: projects[1].id,
-    latitude: nil,
-    longitude: nil
   },
   {
     city_id: cities[1].id,
+    address: '4 rue Griffuelhes, 94800 Villejuif',
     street_number: 4,
     street_name: 'Rue Griffuelhes',
     zipcode: 94800,
@@ -172,9 +169,7 @@ properties_villejuif = Property.create!([
     building_height_floors: 1,
     nb_rooms_per_dwelling: 2,
     energy_class: 'G',
-    project_id: projects[1].id,
-    latitude: nil,
-    longitude: nil
+    project_id: projects[1].id
   }
 ])
 

@@ -17,5 +17,23 @@ class PropertiesController < ApplicationController
     @property = Property.find(params[:id])
   end
 
+  def new
+    @property = Property.new
+    @cities = City.all
+  end
 
+  def create
+    @property = Property.new(property_params)
+    if @property.save
+      redirect_to properties_path
+    else
+      render :new
+    end
+  end
+
+  private
+
+  def property_params # strong params
+    params.require(:property).permit(:area_sqm_land, :year_construction, :area_sqm_livable, :floor_area_ratio, :nb_dwelling, :density_area, :building_zone)
+  end
 end

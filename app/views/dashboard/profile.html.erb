@@ -1,4 +1,5 @@
 <h1>Dashboard</h1>
+<<<<<<< HEAD
 <div class="container">
   <div class="project-container">
     <h2>Mes projets</h2>
@@ -34,6 +35,35 @@
         </div>
 
     </div>
+=======
+<div>
+  <h2>Mes projets</h2>
+  <% @projects.each do |project| %>
+    <h3><%= project.project_name %></h3>
+    <ul>
+      <li><%= project.nb_dwelling %></li>
+      <li><%= project.area_sqm_land %></li>
+      <li><%= project.area_sqm_livable %></li>
+      <li><%= project.floor_area_ratio %></li>
+    </ul>
+    <%= link_to 'Accéder au détail', project_path(project), class: 'btn btn-secondary'%>
+  <% end %>
+</div>
+<div>
+  <h2>Mes Propriétes</h2>
+    <% @properties.each do |property| %>
+      <h3><%= property.address %></h3>
+      <ul>
+        <li><%= property.nb_dwelling %></li>
+        <li><%= property.area_sqm_land %></li>
+        <li><%= property.area_sqm_livable %></li>
+        <li><%= property.floor_area_ratio %></li>
+      </ul>
+      <%= link_to 'Accéder au détail', project_path(project), class: 'details-button'%>
+      <%= link_to 'Modifier', project_path(project), class: 'modify-button'%>
+      <%= link_to 'Supprimer', project_path(project), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-button'%>
+    <% end %>
+>>>>>>> master
   </div>
   <div class="property-container">
     <h2>Mes Propriétes</h2>
