@@ -10,14 +10,14 @@
       <%= f.input :address, label: "Adresse" %>
       <%= f.input :street_number, label: "Numéro d'adresse" %>
       <%= f.input :street_name, label: "Nom de la rue" %>
-      <%= f.input :zipcode %>
-      <%= f.input :building_height_floors %>
-      <%= f.input :nb_rooms_per_dwelling %>
-      <%= f.input :energy_class %>
-      <%= f.input :floor_area_ratio %>
-      <%= f.input :nb_dwelling %>
-      <%= f.input :density_area %>
-      <%= f.input :building_zone %>
+      <%= f.input :zipcode, label: "Code postal" %>
+      <%= f.input :building_height_floors, label: "Nombre d'étages" %>
+      <%= f.input :nb_rooms_per_dwelling, label: "Nombre de pièces par logement" %>
+      <%= f.input :energy_class, label: "Classe énergétique" %>
+      <%= f.input :floor_area_ratio, label: "" %>
+      <%= f.input :nb_dwelling, label: "Nombre de logements" %>
+      <%= f.input :density_area, label: "Zone de densité" %>
+      <%= f.input :building_zone, label: "Zone à bâtir" %>
       <%= f.submit "Sauvegarder mon adresse" %>
     <% end %>
   </div>
