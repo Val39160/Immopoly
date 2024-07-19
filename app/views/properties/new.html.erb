@@ -16,7 +16,7 @@
       <div class="card-simple-form">
         <%# <h3 class="title-property-form">Adresse</h3> %>
         <%= simple_form_for @property do |f| %>
-          <%= f.association :city, collection: @cities,  label: "Ville", label_method: :city_name %>
+          <%= f.association :city, collection: @cities,  label: "Ville" %>
           <%= f.input :area_sqm_land, label: "Surface terrain" %>
           <%= f.input :address, label: "Adresse" %>
           <%= f.input :street_number, label: "Numéro d'adresse" %>
