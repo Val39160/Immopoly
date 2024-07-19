@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+# These are extensions that must be enabled in order to support this database
 ActiveRecord::Schema[7.1].define(version: 2024_07_18_105406) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+enable_extension "plpgsql"
 
   create_table "cities", force: :cascade do |t|
     t.decimal "price_per_sqm_livable"
