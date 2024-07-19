@@ -19,6 +19,7 @@ class PropertiesController < ApplicationController
 
   def new
     @property = Property.new
+    @cities = City.all
   end
 
   def create
