@@ -9,9 +9,11 @@ class SimulationsController < ApplicationController
 
     # Calculations
     area_sqm_land = properties.sum(:area_sqm_land)
-    area_sqm_livable = regulation.floor_area_ratio * area_sqm_land * regulation.building_height
+    area_sqm_construction = regulation.floor_area_ratio * area_sqm_land * regulation.building_height
     unit_cost = params[:unit_cost].to_d
-    cost_destruction = unit_cost * area_sqm_livable
+    cost_destruction = unit_cost * area_sqm_construction
+    area_sqm_common = area_sqm_construction * 0.10
+    area_sqm_livable = area_sqm_construction - area_sqm_common
 
     # Create the simulation with calculated values
     @simulation = @project.simulations.new(
@@ -20,9 +22,9 @@ class SimulationsController < ApplicationController
       price_total_rental: city.price_per_sqm_rental * area_sqm_livable * 12,
       cost_destruction: cost_destruction,
       area_sqm_land: area_sqm_land,
-      floor_area_ratio: regulation.floor_area_ratio * 100,
-      area_sqm_construction: area_sqm_livable * unit_cost,
-      area_sqm_common: area_sqm_livable * 0.10,
+      floor_area_ratio: regulation.floor_area_ratio,
+      area_sqm_construction: area_sqm_construction,
+      area_sqm_common: area_sqm_common,
       building_height_floors: regulation.building_height
     )
 

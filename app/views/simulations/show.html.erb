@@ -5,20 +5,20 @@
     <div class="col-md-6">
       <h2>Données du Projet</h2>
       <div id="project-data">
-        <p>Surface Habitable (m²) : <%= @simulation.project.area_sqm_livable %></p>
-        <p>Coefficient d'Occupation des Sols (COS) : <%= @simulation.project.floor_area_ratio %></p>
-        <p>Superficie de Terrain : <%= number_with_delimiter(@simulation.area_sqm_land.to_i, delimiter: ',', precision: 0) %> m²</p>
+        <p>Surface Habitable <%= @simulation.project.area_sqm_livable %> m²</p>
+        <p>Coefficient d'Occupation des Sols <%= @simulation.project.floor_area_ratio %></p>
+        <p>Superficie de Terrain <%= number_with_precision(@simulation.area_sqm_land, precision: 0, delimiter: ',') %> m²</p>
       </div>
     </div>
     <div class="col-md-6">
       <h1>Résultats de la Simulation</h1>
-      <p>Prix de vente <%= number_with_delimiter(@simulation.price_total_livable.to_i, delimiter: ',', precision: 0) %>€</p>
-      <p>Loyer annuel <%= number_with_delimiter(@simulation.price_total_rental.to_i, delimiter: ',', precision: 0) %> €</p>
-      <p>Coût de Construction / Démolition <%= number_with_delimiter(@simulation.cost_destruction.to_i, delimiter: ',', precision: 0) %> €</p>
-      <p>Coefficient d'Occupation des Sols (COS) : <%= number_with_delimiter(@simulation.floor_area_ratio.to_i, delimiter: ',', precision: 0) %>%</p>
-      <p>Superficie de Construction : <%= number_with_delimiter(@simulation.area_sqm_construction.to_i, delimiter: ',', precision: 0) %> m²</p>
-      <p>Parties communes <%= @simulation.area_sqm_common %> m²</p>
+      <p>Surface habitable <%= number_with_precision(@simulation.area_sqm_livable, precision: 0, delimiter: ',') %> m²</p>
+      <p>Coefficient d'Occupation des Sols (COS) : <%= @simulation.floor_area_ratio %></p>
+      <p>Parties communes <%= number_with_precision(@simulation.area_sqm_common, precision: 0, delimiter: ',') %> m²</p>
       <p>Nombre d'étages <%= @simulation.building_height_floors %></p>
+      <p>Prix de vente <%= number_with_precision(@simulation.price_total_livable, precision: 0, delimiter: ',') %> €</p>
+      <p>Loyer annuel <%= number_with_precision(@simulation.price_total_rental, precision: 0, delimiter: ',') %> €</p>
+      <p>Coût de Construction / Démolition <%= number_with_precision(@simulation.cost_destruction, precision: 0, delimiter: ',') %> €</p>
     </div>
   </div>
   <%= link_to 'Retour au Projet', project_path(@simulation.project), class: 'btn btn-primary' %>
