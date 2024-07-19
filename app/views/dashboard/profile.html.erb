@@ -1,42 +1,55 @@
 <h1>Dashboard</h1>
-<div>
-  <h2>Mes projets</h2>
-  <% @projects.each do |project| %>
-    <h3><%= project.project_name %></h3>
-    <ul>
-      <li><%= project.nb_dwelling %></li>
-      <li><%= project.area_sqm_land %></li>
-      <li><%= project.area_sqm_livable %></li>
-      <li><%= project.floor_area_ratio %></li>
-    </ul>
-    <%= link_to 'Accéder au détail', project_path(project), class: 'btn btn-secondary'%>
-  <% end %>
-</div>
-<div>
-  <h2>Mes Propriétes</h2>
-    <% @properties.each do |property| %>
-      <h3><%= property.address %></h3>
-      <ul>
-        <li><%= property.nb_dwelling %></li>
-        <li><%= property.area_sqm_land %></li>
-        <li><%= property.area_sqm_livable %></li>
-        <li><%= property.floor_area_ratio %></li>
-      </ul>
-      <%= link_to 'Accéder au détail', project_path(project), class: 'details-button'%>
-      <%= link_to 'Modifier', project_path(project), class: 'modify-button'%>
-      <%= link_to 'Supprimer', project_path(project), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-button'%>
-    <% end %>
+<div class="container">
+  <div class="project-container">
+    <h2>Mes projets</h2>
+    <div class="project-cards">
+      <!-- Slider main container -->
+        <div class="swiper" data-controller="swiper">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper">
+            <% @projects.each do |project| %>
+              <!-- Slides -->
+              <div class="swiper-slide">
+                <h4><%= project.project_name %></h4>
+                <ul>
+                  <li><%= project.nb_dwelling %></li>
+                  <li><%= project.area_sqm_land %>m²</li>
+                  <li><%= project.area_sqm_livable %>m²</li>
+                  <li><%= project.floor_area_ratio %></li>
+                </ul>
+                  <%= link_to 'Accéder au détail', project_path(project), class: 'details-button'%>
+                  <%= link_to 'Modifier', project_path(project), class: 'modify-button'%>
+                  <%= link_to 'Supprimer', project_path(project), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-button'%>
+              </div>
+          </div>
+          <!-- If we need pagination -->
+          <div class="swiper-pagination"></div>
+
+          <!-- If we need navigation buttons -->
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
+
+          <!-- If we need scrollbar -->
+          <div class="swiper-scrollbar"></div>
+        </div>
+
+    </div>
   </div>
-  <div>
+  <div class="property-container">
     <h2>Mes Propriétes</h2>
+    <div class="property-cards">
       <% @properties.each do |property| %>
-        <h3><%= property.address %></h3>
+        <h4><%= property.address %></h4>
         <ul>
           <li><%= property.nb_dwelling %></li>
-          <li><%= property.area_sqm_land %></li>
-          <li><%= property.area_sqm_livable %></li>
+          <li><%= property.area_sqm_land %>m²</li>
+          <li><%= property.area_sqm_livable %>m²</li>
           <li><%= property.floor_area_ratio %></li>
         </ul>
+        <%= link_to 'Accéder au détail', property_path(property), class: 'details-button'%>
+        <%= link_to 'Modifier', edit_property_path(property), class: 'modify-button'%>
+        <%= link_to 'Supprimer', property_path(property), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-button'%>
       <% end %>
+    </div>
   </div>
 </div>
