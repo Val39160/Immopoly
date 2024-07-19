@@ -23,6 +23,8 @@ resources :properties, only: [:index, :show, :new, :create, :edit, :update]
     resources :leads, only: [:new, :create]
   end
 
+  get 'addresses/autocomplete', to: 'addresses#autocomplete'
+
   # Defines the root path route ("/")
   # root "posts#index"
 end
