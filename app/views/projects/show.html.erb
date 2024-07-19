@@ -37,35 +37,29 @@
   </div>
 
   <div class="row mt-4">
-    <!-- Section 3: Properties List -->
     <div class="col-md-6">
-      <h2>Propriétés dans le Projet</h2>
-      <div id="properties-list">
-        <% if @properties.present? %>
-          <ul>
-            <% @properties.each do |property| %>
-              <li><%= property.street_name %>, <%= property.street_number %></li>
-            <% end %>
-          </ul>
-        <% else %>
-          <p>Aucune propriété disponible pour ce projet.</p>
-        <% end %>
+      <!-- Section 3: Project Data -->
+      <div class="col-md-12">
+        <h2>Données du Projet</h2>
+        <div id="project-data">
+          <p>Nom du Projet : <%= @project.project_name %></p>
+          <p>Nombre de Logements : <%= @project.nb_dwelling %></p>
+          <p>Surface du Terrain (m²) : <%= @project.area_sqm_land %></p>
+          <p>Surface Habitable (m²) : <%= @project.area_sqm_livable %></p>
+          <p>Coefficient d'Occupation des Sols (COS) : <%= @project.floor_area_ratio %></p>
+        </div>
       </div>
     </div>
 
-    <!-- Section 4: Input for Costs -->
+    <!-- Section 4: Launch Simulation -->
     <div class="col-md-6">
-      <h2>Coûts du Projet</h2>
-      <%= form_with(model: @project, url: project_path(@project), method: :patch) do |form| %>
+      <h2>Lancer une Simulation</h2>
+      <%= form_with(url: project_simulations_path(@project), method: :post) do |form| %>
         <div class="mb-3">
-          <%= form.label :demolition_cost, "Coût de Démolition" %>
-          <%= form.number_field :demolition_cost, class: "form-control" %>
+          <%= form.label :unit_cost, "Coût Unitaire de Construction / Démolition (par m²)" %>
+          <%= form.number_field :unit_cost, class: "form-control" %>
         </div>
-        <div class="mb-3">
-          <%= form.label :construction_cost, "Coût de Construction" %>
-          <%= form.number_field :construction_cost, class: "form-control" %>
-        </div>
-        <%= form.submit "Enregistrer les Coûts", class: "btn btn-primary" %>
+        <%= form.submit "Lancer la Simulation", class: "btn btn-primary" %>
       <% end %>
     </div>
   </div>
