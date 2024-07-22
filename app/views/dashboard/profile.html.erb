@@ -15,7 +15,7 @@
                     <% package.each do |project|%>
                       <div class="project-card">
                         <h4 class="project-name"><%= project.project_name %></h4>
-                        <ul>
+                        <ul class="list">
                           <li>Surface du Terrain : <%= number_with_precision(project.area_sqm_land, precision: 0, delimiter: ',') %> m²</li>
                           <li>Surface Habitable : <%= number_with_precision(project.area_sqm_livable, precision: 0, delimiter: ',') %> m²</li>
                           <li>Coefficient d'Occupation des Sols (COS) : <%= project.floor_area_ratio %></li>
@@ -53,7 +53,7 @@
                 <% package.each do |property| %>
                   <div class="project-card">
                       <h4 class="property-name"><%= property.address %></h4>
-                      <ul>
+                      <ul class="list">
                         <li>Surface du Terrain : <%= number_with_precision(property.area_sqm_land, precision: 0, delimiter: ',') %> m²</li>
                         <li>Surface Habitable : <%= number_with_precision(property.area_sqm_livable, precision: 0, delimiter: ',') %> m²</li>
                         <li>Coefficient d'Occupation des Sols (COS) : <%= property.floor_area_ratio %></li>
