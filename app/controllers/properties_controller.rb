@@ -3,7 +3,9 @@ class PropertiesController < ApplicationController
 
   def index
     @properties = Property.all
+    @property = Property.new
     @project = Project.new
+    @cities = City.all
 
     @markers = @properties.geocoded.map do |property|
       {
@@ -17,10 +19,7 @@ class PropertiesController < ApplicationController
     @property = Property.find(params[:id])
   end
 
-  def new
-    @property = Property.new
-    @cities = City.all
-  end
+
 
   def create
     @property = Property.new(property_params,)
