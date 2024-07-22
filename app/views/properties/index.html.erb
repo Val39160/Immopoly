@@ -8,7 +8,7 @@
     <div class="position-relative" style="width: 50%; height: 1230px; m-20">
       <!-- Search Bar -->
       <div class="position-absolute top-0 start-0 p-3" style="z-index: 1000; width: 450px;">
-        <%= form_with url: new_property_path, method: :get, class: "d-flex" do %>
+        <%= form_with url: properties_path, method: :get, class: "d-flex" do %>
           <div class="search-bar-index">
             <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Entrez l’adresse de votre propriété" %>
              <%= button_tag(type: 'submit', class: "search-index ms-2 w-90", style: "border-radius: 55%; border: none; background-color: white") do %>
@@ -119,15 +119,13 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-
-                <%= f.text_field :project_name, label: 'Nom du projet', placeholder: 'Mon idée de projet' %>
-                <%= f.submit 'Créer le projet', class: 'btn btn-primary btn-custom-text btn-custom-size '%>
-                <h3>Propriétés Sélectionnées</h3>
-
-  <% end %>
+          <%= f.text_field :project_name, label: 'Nom du projet', placeholder: 'Mon idée de projet' %>
+          <%= f.submit 'Créer le projet', class: 'btn btn-primary btn-custom-text btn-custom-size '%>
+          <h3>Propriétés Sélectionnées</h3>
         </div>
         <div class="modal-footer">
         </div>
       </div>
     </div>
   </div>
+  <% end %>
