@@ -23,14 +23,9 @@
             <% end %>
           </div>
           <!-- If we need pagination -->
-          <div class="swiper-pagination"></div>
-
           <!-- If we need navigation buttons -->
           <div class="swiper-button-prev"></div>
           <div class="swiper-button-next"></div>
-
-          <!-- If we need scrollbar -->
-          <div class="swiper-scrollbar"></div>
         </div>
 
     </div>
@@ -53,41 +48,8 @@
               <%= link_to 'Supprimer', property_path(property), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-button'%>
             <% end %>
           </div>
-
-          <div class="swiper-slide">
-            <% @properties.each do |property| %>
-              <h4><%= property.address %></h4>
-              <ul>
-                <li><%= property.nb_dwelling %></li>
-                <li>Surface du Terrain <%= property.area_sqm_land %>m²</li>
-                <li>Surface Habitable <%= property.area_sqm_livable %>m²</li>
-                <li>Coefficient d'Occupation des Sols (COS) <%= property.floor_area_ratio %></li>
-              </ul>
-              <%= link_to 'Accéder au détail', property_path(property), class: 'details-button'%>
-              <%= link_to 'Modifier', edit_property_path(property), class: 'modify-button'%>
-              <%= link_to 'Supprimer', property_path(property), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-button'%>
-            <% end %>
-          </div>
-
-          <div class="swiper-slide">
-            <% @properties.each do |property| %>
-              <h4><%= property.address %></h4>
-              <ul>
-                <li><%= property.nb_dwelling %></li>
-                <li><%= property.area_sqm_land %>m²</li>
-                <li><%= property.area_sqm_livable %>m²</li>
-                <li><%= property.floor_area_ratio %></li>
-              </ul>
-              <%= link_to 'Accéder au détail', property_path(property), class: 'details-button'%>
-              <%= link_to 'Modifier', edit_property_path(property), class: 'modify-button'%>
-              <%= link_to 'Supprimer', property_path(property), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-button'%>
-            <% end %>
-          </div>
-
-
         </div>
       </div>
     </div>
   </div>
 </div>
-<%= console  %>
