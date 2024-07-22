@@ -31,6 +31,16 @@ class PropertiesController < ApplicationController
     end
   end
 
+  def search
+    @property = Property.find_by(address: params[:address].downcase)
+    if @property
+      redirect_to new_property_path
+    else
+      flash[:alert] = "Property not found"
+      redirect_to root_path
+    end
+  end
+
   private
 
   def property_params # strong params
