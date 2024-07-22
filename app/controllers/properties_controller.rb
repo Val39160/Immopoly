@@ -1,9 +1,8 @@
 class PropertiesController < ApplicationController
 
-
   def index
-    @properties = Property.all
-    @property = Property.new
+    @properties = current_user.properties
+    @property = Property.find(params[:property]) if params[:property].present?
     @project = Project.new
     @cities = City.all
 
@@ -27,10 +26,7 @@ class PropertiesController < ApplicationController
     @property = Property.find(params[:id])
   end
 
-
-
   def create
-
     @property = Property.new(property_params,)
     if @property.save!
       redirect_to properties_path
@@ -42,7 +38,7 @@ class PropertiesController < ApplicationController
   def search
     @property = Property.find_by(address: params[:address].downcase)
     if @property
-      redirect_to new_property_path
+      redirect_to properties_path(property: @property)
     else
       flash[:alert] = "Property not found"
       redirect_to root_path
