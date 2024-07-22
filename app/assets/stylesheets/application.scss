@@ -11,3 +11,10 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+@import "project/index";
+@import "project/new";
+
+
+h1 {
+  font-family: 'GothamBold', sans-serif;
+}

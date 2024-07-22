@@ -1,50 +1,65 @@
-<h1>Mes addresses</h1>
 
-<div class="container">
-
-  <div class = "addresses-index-card">
-    <% @properties.each do |propertie| %>
-      <div class="card w-75 mb-3">
-      <div class="card-body">
-        <h5 class="card-title"><%=propertie.address%></h5>
-        <p class="card-text"><%=propertie.area_sqm_land%> m2</p>
-      </div>
-    </div>
-    <% end %>
+  <div class="container-fluid bg-white text-center ">
+    <h1 class="index-h1">Mes adresses</h1>
   </div>
 
-  <div id = "home-map" style="width: 40%; height: 600px; align-items: center; margin: auto; border-radius: 10px;"
+
+<div class="container-fluid bg-white">
+
+  <div class="container mt-0">
+    <div class="card rounded-3 shadow">
+      <div class="card-header bg-white rounded-1">
+        Vos propriétés
+      </div>
+      <div class="card-body bg-white rounded-2 card-scroll">
+        <% @properties.each do |propertie| %>
+          <div class="property-card mb-3 p-3 border rounded-5">
+            <h5 class="card-title"><%= propertie.address %></h5>
+            <div class="d-flex justify-content-between">
+              <div>Lot : <%= propertie.nb_dwelling %></div>
+              <div><%= propertie.area_sqm_land %> m² terrain</div>
+              <div><%= propertie.area_sqm_livable %> m² habitables</div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="home-map" style="width: 65%; height: 600px; margin: 50px auto; border-radius: 10px;"
     data-controller="map"
     data-map-markers-value="<%= @markers.to_json %>"
     data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
 
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Creer un projet
-</button>
+  <!-- Button trigger modal -->
+  <div class="container mt-5 text-center">
+    <button type="button" class="btn btn-primary m-3 btn-custom-text p-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Creer un projet
+    </button>
+  </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-            <%= simple_form_for @project do |f| %>
-              <%= f.input :project_name, label: 'Nom du projet' %>
-              <%= f.button :submit, class: 'btn btn-primary' %>
-            <% end %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content bg-custom">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Creer un Projet</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+              <%= simple_form_for @project do |f| %>
+                <%= f.input :project_name, label: 'Nom du projet' %>
+                <%= f.button :submit, class: 'btn btn-primary btn-custom-text' %>
+              <% end %>
+        </div>
+        <div class="modal-footer">
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
 </div>

@@ -12,7 +12,7 @@ resources :properties, only: [:index, :show, :new, :create, :edit, :update]
 
 
   resources :projects, only: [:show, :new, :create] do
-    resources :simulations, only: [:new, :create]
+    resources :simulations, only: [:show, :new, :create]
   end
   resources :cities, only: [:show]
 
