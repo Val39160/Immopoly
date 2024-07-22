@@ -11,6 +11,7 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+@import 'pages/home';  // Include the home.scss file from pages folder
 @import "properties/index";
 @import "properties/new";
 

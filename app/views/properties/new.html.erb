@@ -1,39 +1,28 @@
 <div class="container-fluid bg-white">
-
   <div class="container-fluid bg-white text-center">
     <h1 class="title-property-new">Votre propriété en détails</h1>
   </div>
 
-
   <div class="container">
     <div class="card-map-form">
-
-      <div id = "home-map" style="width: 40%; height: 600px; align-items: center; margin: auto; border-radius: 10px;"
-        data-controller="map"
-        data-map-markers-value="<%= @markers.to_json %>"
-        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+      <div id="home-map" style="width: 40%; height: 600px; align-items: center; margin: auto; border-radius: 10px;"
+           data-controller="map"
+           data-map-markers-value="<%= @markers.to_json %>"
+           data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
       </div>
       <div class="card-simple-form">
-        <%# <h3 class="title-property-form">Adresse</h3> %>
         <%= simple_form_for @property do |f| %>
-          <%= f.association :city, collection: @cities,  label: "Ville" %>
-          <%= f.input :area_sqm_land, label: "Surface terrain" %>
           <%= f.input :address, label: "Adresse" %>
-          <%= f.input :street_number, label: "Numéro d'adresse" %>
-          <%= f.input :street_name, label: "Nom de la rue" %>
-          <%= f.input :zipcode, label: "Code postal" %>
+          <%= f.input :area_sqm_land, label: "Surface terrain" %>
+          <%= f.input :area_sqm_livable, label: "Surface habitable" %>
+          <%= f.input :floor_area_ratio, label: "Coefficient d'occupation des sols" %>
           <%= f.input :building_height_floors, label: "Nombre d'étages" %>
           <%= f.input :nb_rooms_per_dwelling, label: "Nombre de pièces par logement" %>
           <%= f.input :energy_class, label: "Classe énergétique" %>
-          <%= f.input :floor_area_ratio, label: "Coefficient d'occupation des sols" %>
-          <%= f.input :nb_dwelling, label: "Nombre de logements" %>
-          <%= f.input :density_area, label: "Zone de densité" %>
-          <%= f.input :building_zone, label: "Zone à bâtir" %>
-          <%= f.submit "Sauvegarder mon adresse" %>
+          <%= f.submit "Sauvegarder mon adresse", class: "btn btn-primary" %>
         <% end %>
+        <%= link_to 'Lancez vous!', new_project_path, class: "btn btn-success mt-3" %>
       </div>
     </div>
-
   </div>
-
 </div>
