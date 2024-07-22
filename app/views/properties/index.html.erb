@@ -3,17 +3,17 @@
     <h1 class="index-h1">1. Chercher et ajouter ses adresses</h1>
   </div>
 
-  <div class="d-flex">
+  <div class="d-flex m-5">
     <!-- Section de recherche et carte -->
-    <div class="position-relative" style="width: 50%; height: 1340px; m-20">
+    <div class="position-relative" style="width: 50%; height: 1230px; m-20">
       <!-- Search Bar -->
-      <div class="position-absolute top-0 start-0 p-3" style="z-index: 1000; width: 340px;">
+      <div class="position-absolute top-0 start-0 p-3" style="z-index: 1000; width: 450px;">
         <%= form_with url: new_property_path, method: :get, class: "d-flex" do %>
           <div class="search-bar-index">
             <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Entrez l’adresse de votre propriété" %>
-            <%= button_tag(type: 'submit', class: "search-index ms-2") do %> <!-- Correction: 'Submit' en 'submit' -->
-              <i class="fa-solid fa-magnifying-glass" style="color: #27CE8D;"></i>
-            <% end %>
+             <%= button_tag(type: 'submit', class: "search-index ms-2 w-90", style: "border-radius: 55%; border: none; background-color: white") do %>
+             <i class="fa-solid fa-magnifying-glass" style="color: #27CE8D"></i>
+             <% end %>
           </div>
         <% end %>
       </div>
@@ -32,53 +32,49 @@
       <div class="property-form">
         <%= simple_form_for @property do |f| %>
           <!-- Champs du formulaire -->
-          <div class="form-group">
-            <%= f.association :city, collection: @cities, label: "Ville" %>
-          </div>
-          <div class="form-group">
-            <%= f.input :area_sqm_land, label: "Surface terrain" %>
-          </div>
-          <div class="form-group">
-            <%= f.input :address, label: "Adresse" %>
-          </div>
-          <div class="form-group">
-            <%= f.input :street_number, label: "Numéro d'adresse" %>
-          </div>
-          <div class="form-group">
-            <%= f.input :street_name, label: "Nom de la rue" %>
-          </div>
-          <div class="form-group">
-            <%= f.input :zipcode, label: "Code postal" %>
-          </div>
-          <div class="form-group">
-            <%= f.input :building_height_floors, label: "Nombre d'étages" %>
-          </div>
-          <div class="form-group">
-            <%= f.input :nb_rooms_per_dwelling, label: "Nombre de pièces par logement" %>
-          </div>
-          <div class="form-group">
-            <%= f.input :energy_class, label: "Classe énergétique" %>
-          </div>
-          <div class="form-group">
-            <%= f.input :floor_area_ratio, label: "Coefficient d'occupation des sols" %>
-          </div>
-          <div class="form-group">
-            <%= f.input :nb_dwelling, label: "Nombre de logements" %>
-          </div>
-          <div class="form-group">
-            <%= f.input :density_area, label: "Zone de densité" %>
-          </div>
-          <div class="form-group">
-            <%= f.input :building_zone, label: "Zone à bâtir" %>
-          </div>
-          <div class="form-group">
-            <%= f.submit "Sauvegarder mon adresse" %>
-          </div>
+            <div class="form-group">
+            <%= f.input :area_sqm_land, label: "Surface terrain", input_html: { style: "background-color: #DCFFF3" } %>
+            </div>
+            <div class="form-group">
+            <%= f.input :address, label: "Adresse", input_html: { style: "background-color: #DCFFF3" } %>
+            </div>
+            <div class="form-group">
+            <%= f.input :street_number, label: "Numéro d'adresse", input_html: { style: "background-color: #DCFFF3" } %>
+            </div>
+            <div class="form-group">
+            <%= f.input :street_name, label: "Nom de la rue", input_html: { style: "background-color: #DCFFF3" } %>
+            </div>
+            <div class="form-group">
+            <%= f.input :zipcode, label: "Code postal", input_html: { style: "background-color: #DCFFF3" } %>
+            </div>
+            <div class="form-group">
+            <%= f.input :building_height_floors, label: "Nombre d'étages", input_html: { style: "background-color: #DCFFF3" } %>
+            </div>
+            <div class="form-group">
+            <%= f.input :nb_rooms_per_dwelling, label: "Nombre de pièces par logement", input_html: { style: "background-color: #DCFFF3" } %>
+            </div>
+            <div class="form-group">
+            <%= f.input :energy_class, label: "Classe énergétique", input_html: { style: "background-color: #DCFFF3" } %>
+            </div>
+            <div class="form-group">
+            <%= f.input :floor_area_ratio, label: "Coefficient d'occupation des sols", input_html: { style: "background-color: #DCFFF3" } %>
+            </div>
+            <div class="form-group">
+            <%= f.input :nb_dwelling, label: "Nombre de logements", input_html: { style: "background-color: #DCFFF3" } %>
+            </div>
+            <div class="form-group">
+            <%= f.input :density_area, label: "Zone de densité", input_html: { style: "background-color: #DCFFF3" } %>
+            </div>
+            <div class="form-group">
+            <%= f.input :building_zone, label: "Zone à bâtir", input_html: { style: "background-color: #DCFFF3" } %>
+            </div>
+
         <% end %>
       </div>
     </div>
   </div>
 
+  <%= form_with model: @project do |f| %>
   <!-- Liste des propriétés -->
   <div class="container m-auto">
     <div class="container m-auto">
@@ -88,15 +84,20 @@
         </div>
         <div class="index-scroll card-body bg-white ">
           <% @properties.each do |propertie| %>
-            <div class="property-card mb-3 p-3 border rounded-5">
+            <div class="property-card mb-3 p-3 border rounded-5 shadow-sm">
               <h5 class="card-title"><%= propertie.address %></h5>
               <div class="d-flex justify-content-start m-1">
-                <div>Lot : <%= propertie.nb_dwelling %></div>
-                <div><%= propertie.area_sqm_land %> m² terrain</div>
-                <div><%= propertie.area_sqm_livable %> m² habitables</div>
+                <div class = "property-card-info">Lot :  <%= propertie.nb_dwelling %></div>
+                <div class = "property-card-info"><%= propertie.area_sqm_land %>  m²  terrain</div>
+                <div class = "property-card-info"><%= propertie.area_sqm_livable %>  m²  habitables</div>
+                  <div class= "checkbox-container">
+                    <%= check_box_tag 'property_ids[]', propertie.id, class: 'properties-checkbox' %>
+                  </div>
+
               </div>
+
             </div>
-          <% end %> <!-- Fermeture correcte de la balise ERB -->
+          <% end %>
         </div>
       </div>
     </div>
@@ -104,9 +105,29 @@
 
   <!-- Modal pour créer un projet -->
   <div class="container m-auto text-center">
-    <button type="button" class="btn btn-primary m-3 btn-custom-text p-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-primary m-3 btn-custom-text p-3 w-150" data-bs-toggle="modal" data-bs-target="#exampleModal">
       Créer un projet
     </button>
   </div>
 
-  <
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+      <div class="modal-content bg-custom  ">
+        <div class="modal-header ">
+          <h1 class="modal-title fs-5 " id="exampleModalLabel">Créer un Projet</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+                <%= f.text_field :project_name, label: 'Nom du projet', placeholder: 'Mon idée de projet' %>
+                <%= f.submit 'Créer le projet', class: 'btn btn-primary btn-custom-text'%>
+                <h3>Propriétés Sélectionnées</h3>
+
+  <% end %>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>

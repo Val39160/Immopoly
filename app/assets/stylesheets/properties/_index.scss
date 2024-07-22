@@ -32,6 +32,8 @@ h1.index-h1::after {
 .btn-custom-text{
   color: white;
   font-family: $body-font;
+
+
 }
 
 .modal-title{
@@ -112,7 +114,9 @@ h3.title-property-form::after {
 }
 
 .search-bar-index {
-  width: 540px;
+  width: 640px;
+  display: flex;
+  position: relative;
 
 }
 
@@ -155,4 +159,40 @@ h3.title-property-form::after {
   position: absolute;
   bottom: -2px; /* ajustez selon vos besoins */
   left: 0;
+}
+
+.form-group {
+  border-radius: 10px;
+  background-color: #DCFFF3;
+}
+
+.checkbox-container {
+    margin-left:  auto;
+    margin-top: auto;
+    margin-bottom: 20px;
+}
+
+.properties-checkbox {
+  height: 20px;
+  width: 20px;
+  border-radius: 20px;
+}
+
+.properties-checkbox:checked {
+  background-color: #00ffcc;
+}
+
+.property-card-info{
+  margin-right: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #dcfff3;
+  padding: 15px;
+  margin-top: 10px;
+}
+
+.card-title {
+  font-family: 'Gotham', sans-serif;
+  font-weight: bold;
+  color: black;
 }

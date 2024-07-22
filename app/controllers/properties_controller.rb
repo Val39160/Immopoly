@@ -13,6 +13,14 @@ class PropertiesController < ApplicationController
         lng: property.longitude
       }
     end
+
+    selected_property_ids = params[:property_ids]
+    if selected_property_ids.present?
+      @selected_properties = Property.where(id: selected_property_ids)
+    else
+      @selected_properties = []
+    end
+
   end
 
   def show
@@ -22,6 +30,7 @@ class PropertiesController < ApplicationController
 
 
   def create
+
     @property = Property.new(property_params,)
     if @property.save!
       redirect_to properties_path
