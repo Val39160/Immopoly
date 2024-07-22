@@ -34,6 +34,7 @@ h1.index-h1::after {
   font-family: $body-font;
 
 
+
 }
 
 .modal-title{
@@ -169,13 +170,15 @@ h3.title-property-form::after {
 .checkbox-container {
     margin-left:  auto;
     margin-top: auto;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    margin-right: 20px;
 }
 
 .properties-checkbox {
   height: 20px;
   width: 20px;
   border-radius: 20px;
+  border: solid;
 }
 
 .properties-checkbox:checked {
@@ -195,4 +198,8 @@ h3.title-property-form::after {
   font-family: 'Gotham', sans-serif;
   font-weight: bold;
   color: black;
+}
+.btn-custom-size {
+  padding: 30px 40px; /* Ajustez la taille du padding selon vos besoins */
+  font-size: 20px;    /* Ajustez la taille de la police selon vos besoins */
 }
