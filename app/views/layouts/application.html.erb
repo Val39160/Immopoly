@@ -8,7 +8,7 @@
 
 
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
   <%= javascript_importmap_tags %>
 
 
@@ -27,7 +27,7 @@
     <%= yield %>
   </div>
 
-  <%# <script>
+  <% <script>
     $(document).ready(function() {
       $('#address-search').on('input', function() {
         var query = $(this).val();
@@ -55,6 +55,6 @@
         $('#autocomplete-results').empty();
       });
     });
-  </script> %>
+  </script>
 </body>
 </html>
