@@ -17,13 +17,15 @@ Rails.application.routes.draw do
   end
 
   resources :projects, only: [:show, :new, :create] do
-    resources :simulations, only: [:show, :new, :create]
+    resources :simulations, only: [:show, :new, :create] do
+      member do
+        post 'save'
+      end
+    end
   end
 
   resources :cities, only: [:show]
-
   get "dashboard", to: "dashboard#profile"
-
   resources :simulations, only: [:show] do
     resources :leads, only: [:new, :create]
   end

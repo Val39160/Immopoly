@@ -1,18 +1,21 @@
-<!-- app/views/projects/show.html.erb -->
-
 <div class="container">
   <div class="row">
     <!-- Section 1: Summary of Applicable Regulations -->
-    <div class="col-md-6">
-      <h2>Résumé des Réglementations Applicables</h2>
-      <div id="regulations-summary">
+    <div class="col-md-6 mb-4">
+      <h2><i class="fas fa-gavel"></i> Plan Local d'Urbanisme (PLU)</h2>
+      <div id="regulations-summary" class="p-3 border rounded">
         <% if @regulations.present? %>
           <% @regulations.each do |regulation| %>
-            <p>Coefficient d'Occupation des Sols (COS) : <%= regulation.floor_area_ratio %></p>
-            <p>Hauteur des Bâtiments : <%= regulation.building_height %> étages</p>
-            <p>Logements Sociaux : <%= regulation.housing_social %></p>
-            <p>Logements Abordables : <%= regulation.housing_affordable %></p>
-            <p>Logements à Prix de Marché : <%= regulation.housing_market_rate %></p>
+            <p>
+              D'après le PLU de
+              <strong><%= @city.city_name.capitalize %></strong>
+              et la localisation exacte de votre bien immobilier, l'emprise au sol maximale serait de
+              <strong><%= number_with_precision(regulation.floor_area_ratio * @project.area_sqm_land, precision: 0, delimiter: ' ') %> m²</strong>
+              sur la base d'un coefficient d'occupation des sols (COS) maximal de
+              <strong><%= number_with_precision(regulation.floor_area_ratio * 100, precision: 0, delimiter: ' ') %>%</strong>
+              avec un nombre de niveaux maximal de
+              <strong><%= regulation.building_height - 1 %> étages</strong>.
+            </p>
           <% end %>
         <% else %>
           <p>Aucune réglementation disponible pour cette ville.</p>
@@ -21,14 +24,24 @@
     </div>
 
     <!-- Section 2: City Data -->
-    <div class="col-md-6">
-      <h2>Données de la Ville</h2>
-      <div id="city-data">
+    <div class="col-md-6 mb-4">
+      <h2><i class="fas fa-city"></i> Votre estimation actuelle</h2>
+      <div id="city-data" class="p-3 border rounded">
         <% if @city.present? %>
-          <p>Nom de la Ville : <%= @city.city_name %></p>
-          <p>Prix au m² Habitable : <%= @city.price_per_sqm_livable %></p>
-          <p>Prix au m² de Terrain : <%= @city.price_per_sqm_land %></p>
-          <p>Prix au m² Locatif : <%= @city.price_per_sqm_rental %></p>
+          <p>
+            Actuellement, à
+            <strong><%= @city.city_name.capitalize %></strong>,
+            le prix d'achat par m² habitable est de
+            <strong><%= number_with_precision(@city.price_per_sqm_livable, precision: 0, delimiter: ' ') %>€</strong>
+            valorisant ainsi votre bien actuel à
+            <strong><%= number_with_precision(@city.price_per_sqm_livable * @project.area_sqm_livable, precision: 0, delimiter: ' ') %>€</strong>
+            et le loyer par m² habitable est de
+            <strong><%= number_with_precision(@city.price_per_sqm_rental, precision: 0, delimiter: ' ') %>€</strong>
+            représentant un revenu locatif annuel de
+            <strong><%= number_with_precision(@city.price_per_sqm_rental * @project.area_sqm_livable * 12, precision: 0, delimiter: ' ') %>€</strong>
+            et un taux de rendement brut de
+            <strong>+<%= number_with_precision((@city.price_per_sqm_rental * @project.area_sqm_livable * 12)/(@city.price_per_sqm_livable * @project.area_sqm_livable)*100, precision: 2, delimiter: ' ') %>%</strong>.
+          </p>
         <% else %>
           <p>Aucune donnée disponible pour cette ville.</p>
         <% end %>
@@ -37,30 +50,47 @@
   </div>
 
   <div class="row mt-4">
-    <div class="col-md-6">
+    <div class="col-md-6 mb-4">
       <!-- Section 3: Project Data -->
       <div class="col-md-12">
-        <h2>Données du Projet</h2>
-        <div id="project-data">
-          <p>Nom du Projet : <%= @project.project_name %></p>
-          <p>Nombre de Logements : <%= @project.nb_dwelling %></p>
-          <p>Surface du Terrain (m²) : <%= @project.area_sqm_land %></p>
-          <p>Surface Habitable (m²) : <%= @project.area_sqm_livable %></p>
-          <p>Coefficient d'Occupation des Sols (COS) : <%= @project.floor_area_ratio %></p>
+        <h2><i class="fas fa-project-diagram"></i> Votre projet</h2>
+        <div id="project-data" class="p-3 border rounded">
+          <p>
+            Votre actif immobilier comprend un terrain de
+              <strong><%= number_with_precision(@project.area_sqm_land, precision: 0, delimiter: ',') %> m²</strong>
+            avec une habitation dont l'emprise au sol (i.e. le coefficient d'occupation des sols) représente
+              <strong><%= number_with_precision(@project.floor_area_ratio * 100, precision: 0, delimiter: ' ') %>%</strong> du terrain
+            pour une surface habitable de
+              <strong><%= number_with_precision(@project.area_sqm_livable, precision: 0, delimiter: ',') %> m²</strong>.
+          </p>
         </div>
       </div>
     </div>
 
     <!-- Section 4: Launch Simulation -->
-    <div class="col-md-6">
-      <h2>Lancer une Simulation</h2>
-      <%= form_with(url: project_simulations_path(@project), method: :post) do |form| %>
+    <div class="col-md-6 mb-4">
+      <h2><i class="fas fa-play-circle"></i> Votre simulation</h2>
+      <%= form_with(url: project_simulations_path(@project), method: :post, id: "simulation-form", class: "p-3 border rounded") do |form| %>
         <div class="mb-3">
-          <%= form.label :unit_cost, "Coût Unitaire de Construction / Démolition (par m²)" %>
-          <%= form.number_field :unit_cost, class: "form-control" %>
+          <%= form.label :unit_cost, "Estimer le potentiel immobilier de votre bien en achat ou locatif ainsi que le niveau d'investissement requis en coût de construction / démolition.", class: 'form-label' %>
+          <%= form.select :unit_cost, options_for_select([['-- Sélectionnez une option --', ''], ['Basique - 1 500€', 1500], ['Standard - 2 000€', 2000], ['Haut de gamme - 2 500€', 2500]]), {}, { class: 'form-select', id: 'unit_cost' } %>
         </div>
-        <%= form.submit "Lancer la Simulation", class: "btn btn-primary" %>
+        <%= form.submit "Lancer la Simulation", class: "btn btn-primary w-100", id: "submit-button", disabled: true %>
       <% end %>
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const unitCostInput = document.getElementById("unit_cost");
+    const submitButton = document.getElementById("submit-button");
+
+    unitCostInput.addEventListener("change", function() {
+      submitButton.disabled = unitCostInput.value.trim() === "" || unitCostInput.value <= 0;
+    });
+
+    // Initial check to enable or disable the submit button
+    submitButton.disabled = unitCostInput.value.trim() === "" || unitCostInput.value <= 0;
+  });
+</script>
