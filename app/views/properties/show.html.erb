@@ -1,60 +1,49 @@
-<div>
+<div class="container">
   <div>
     <h1 class="property-show-h1">Votre propriété en détails</h1>
   </div>
-  <div>
-    <!-- map goes here -->
-    <div id="home-map" style="width: 100%; height: 100%; border-radius: 10px;"
+  <div class="d-flex m-5">
+    <!-- carte -->
+    <div class="position-relative" style="width: 50%; m-20">
+
+      <!-- Map -->
+      <div id="home-map" style="width: 100%; height: 100%; border-radius: 10px;"
            data-controller="map"
            data-map-markers-value="<%= @markers.to_json %>"
            data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
       </div>
-  </div>
-  <div>
-       <!-- Formulaire des propriétés -->
-    <div class="card-simple-form ms-4 mb-5" style="width: 40%;">
-      <h3 class="title-property-form">Adresse</h3>
-      <div class="property-form">
-        <%= simple_form_for @property do |f| %>
-          <!-- Champs du formulaire -->
-            <div class="form-group">
-            <%= f.input :area_sqm_land, label: "Surface terrain", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
-            <div class="form-group">
-            <%= f.input :address, label: "Adresse", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
-            <div class="form-group">
-            <%= f.input :street_number, label: "Numéro d'adresse", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
-            <div class="form-group">
-            <%= f.input :street_name, label: "Nom de la rue", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
-            <div class="form-group">
-            <%= f.input :zipcode, label: "Code postal", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
-            <div class="form-group">
-            <%= f.input :building_height_floors, label: "Nombre d'étages", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
-            <div class="form-group">
-            <%= f.input :nb_rooms_per_dwelling, label: "Nombre de pièces par logement", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
-            <div class="form-group">
-            <%= f.input :energy_class, label: "Classe énergétique", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
-            <div class="form-group">
-            <%= f.input :floor_area_ratio, label: "Coefficient d'occupation des sols", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
-            <div class="form-group">
-            <%= f.input :nb_dwelling, label: "Nombre de logements", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
-            <div class="form-group">
-            <%= f.input :density_area, label: "Zone de densité", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
-            <div class="form-group">
-            <%= f.input :building_zone, label: "Zone à bâtir", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
+    </div>
 
-        <% end %>
+    <!-- Formulaire des propriétés -->
+    <div class="card-simple-form ms-4 mb-5" style="width: 40%;">
+      <h3 class="title-property-form"><%= @property.address %></h3>
+      <div class="property-form">
+            <div class="info-box" style="background-color: #DCFFF3">
+            <p>Surface terrain</p> <%= number_with_precision(@property.area_sqm_land, precision: 0, delimiter: ',') %> m²
+            </div>
+            <div class="info-box" style="background-color: #DCFFF3">
+            <p>Nombre d'étages</p> <%= @property.building_height_floors %>
+            </div>
+            <div class="info-box" style="background-color: #DCFFF3">
+            <p>Nombre de pièces par logement</p> <%= @property.nb_rooms_per_dwelling %>
+            </div>
+            <div class="info-box" style="background-color: #DCFFF3">
+            <p>Classe énergétique</p> <%= @property.energy_class %>
+            </div>
+            <div class="info-box" style="background-color: #DCFFF3">
+            <p>Coefficient d'occupation des sols</p> <%= @property.floor_area_ratio %>
+            </div>
+            <div class="info-box" style="background-color: #DCFFF3">
+            <p>Nombre de logements</p> <%= @property.nb_dwelling %>
+            </div>
+            <div class="info-box" style="background-color: #DCFFF3">
+            <p>Zone de densité</p> <%= @property.density_area %>
+            </div>
+            <div class="last-info-box" style="background-color: #DCFFF3">
+            <p>Zone à bâtir</p> <%= @property.building_zone %>
+            </div>
       </div>
+      <%= link_to 'Retourner au dashboard', dashboard_path(current_user), class: 'return-to-dashboard-button'%>
+    </div>
   </div>
 </div>
