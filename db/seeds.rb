@@ -123,6 +123,25 @@ properties_vannes = Property.create!([
     energy_class: 'G',
     project_id: projects[0].id,
     user_id: users.first.id
+  },
+  {
+    city_id: cities[0].id,
+    address: '75 avenue de la marne 56000 vannes',
+    street_number: 55,
+    street_name: 'avenue de la marne',
+    zipcode: 56000,
+    nb_dwelling: 1,
+    area_sqm_land: 516,
+    area_sqm_livable: 147,
+    floor_area_ratio: 0.23,
+    year_construction: 1945,
+    building_zone: 'residential',
+    density_area: 'mid',
+    building_height_floors: 2,
+    nb_rooms_per_dwelling: 4,
+    energy_class: 'G',
+    project_id: projects[0].id,
+    user_id: users.first.id
   }
 ])
 

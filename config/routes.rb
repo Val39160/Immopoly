@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   resources :properties, only: [:index, :show, :create, :edit, :update] do
     collection do
       get "search"
+
     end
+    get 'addresses/autocomplete', to: 'addresses#autocomplete'
   end
 
   resources :projects, only: [:show, :new, :create] do
