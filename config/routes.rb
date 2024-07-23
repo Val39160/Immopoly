@@ -11,17 +11,21 @@ Rails.application.routes.draw do
   resources :properties, only: [:index, :show, :create, :edit, :update] do
     collection do
       get "search"
+
     end
+    get 'addresses/autocomplete', to: 'addresses#autocomplete'
   end
 
   resources :projects, only: [:show, :new, :create] do
-    resources :simulations, only: [:show, :new, :create]
+    resources :simulations, only: [:show, :new, :create] do
+      member do
+        post 'save'
+      end
+    end
   end
 
   resources :cities, only: [:show]
-
   get "dashboard", to: "dashboard#profile"
-
   resources :simulations, only: [:show] do
     resources :leads, only: [:new, :create]
   end

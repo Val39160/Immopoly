@@ -9,7 +9,9 @@ class PropertiesController < ApplicationController
     @markers = @properties.geocoded.map do |property|
       {
         lat: property.latitude,
-        lng: property.longitude
+        lng: property.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: {property: property}),
+
       }
     end
 
@@ -22,9 +24,14 @@ class PropertiesController < ApplicationController
 
   end
 
+  def autocomplete
+    query = params[:address]
+    results = BanApiService.new.autocomplete(address)
+    render json: results
+  end
+
   def show
     @property = Property.find(params[:id])
-
     @markers =
       [{
         lat: @property.latitude,
@@ -47,7 +54,7 @@ class PropertiesController < ApplicationController
       redirect_to properties_path(property: @property)
     else
       flash[:alert] = "Property not found"
-      redirect_to root_path
+      redirect_to properties_path
     end
   end
 

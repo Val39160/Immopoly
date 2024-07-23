@@ -1,5 +1,7 @@
 class SimulationsController < ApplicationController
-  before_action :set_project, only: [:create, :show]
+  before_action :set_project, only: [:create, :show, :save]
+  before_action :set_simulation, only: [:show, :save]
+  before_action :set_city, only: [:show]
 
   def create
     # Fetch related data
@@ -36,7 +38,15 @@ class SimulationsController < ApplicationController
   end
 
   def show
-    @simulation = Simulation.find(params[:id])
+    # This action should only display the simulation
+  end
+
+  def save
+    if @simulation.update(simulation_params)
+      redirect_to dashboard_path, notice: 'Simulation was successfully saved.'
+    else
+      redirect_to project_simulation_path(@project, @simulation), alert: 'Failed to save the simulation.'
+    end
   end
 
   private
@@ -45,7 +55,15 @@ class SimulationsController < ApplicationController
     @project = Project.find(params[:project_id])
   end
 
+  def set_simulation
+    @simulation = Simulation.find(params[:id])
+  end
+
+  def set_city
+    @city = @simulation.project.properties.first.city
+  end
+
   def simulation_params
-    params.require(:simulation).permit(:unit_cost)
+    params.require(:simulation).permit(:area_sqm_livable, :price_total_livable, :price_total_rental, :cost_destruction, :area_sqm_land, :floor_area_ratio, :area_sqm_construction, :area_sqm_common, :building_height_floors)
   end
 end
