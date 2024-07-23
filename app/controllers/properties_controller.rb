@@ -1,9 +1,10 @@
 class PropertiesController < ApplicationController
 
-
   def index
-    @properties = Property.all
+    @properties = current_user.properties
+    @property = Property.find(params[:property]) if params[:property].present?
     @project = Project.new
+    @cities = City.all
 
     @markers = @properties.geocoded.map do |property|
       {
@@ -11,15 +12,18 @@ class PropertiesController < ApplicationController
         lng: property.longitude
       }
     end
+
+    selected_property_ids = params[:property_ids]
+    if selected_property_ids.present?
+      @selected_properties = Property.where(id: selected_property_ids)
+    else
+      @selected_properties = []
+    end
+
   end
 
   def show
     @property = Property.find(params[:id])
-  end
-
-  def new
-    @property = Property.new
-    @cities = City.all
   end
 
   def create
@@ -28,6 +32,16 @@ class PropertiesController < ApplicationController
       redirect_to properties_path
     else
       render :new
+    end
+  end
+
+  def search
+    @property = Property.find_by(address: params[:address].downcase)
+    if @property
+      redirect_to properties_path(property: @property)
+    else
+      flash[:alert] = "Property not found"
+      redirect_to root_path
     end
   end
 
