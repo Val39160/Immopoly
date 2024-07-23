@@ -1,62 +1,77 @@
-<!-- app/views/simulations/show.html.erb -->
-
 <div class="container">
   <div class="row">
-    <div class="col-md-6">
-      <h2>Données du Projet</h2>
-      <div id="project-data">
-        <p>Surface Habitable <%= number_with_precision(@simulation.project.area_sqm_livable, precision: 0, delimiter: ' ') %> m²</p>
-        <p>Coefficient d'occupation des sols <%= number_with_precision(@simulation.project.floor_area_ratio * 100, precision: 0, delimiter: ' ') %>%</p>
-        <p>Superficie de Terrain <%= number_with_precision(@simulation.area_sqm_land, precision: 0, delimiter: ' ') %> m²</p>
+    <!-- Current Property Section -->
+    <div class="col-md-6 mb-4">
+      <h2><i class="fas fa-home"></i> Votre propriété actuelle</h2>
+      <div id="project-data" class="p-3 border rounded">
+        <p>Surface Habitable: <strong><%= number_with_precision(@simulation.project.area_sqm_livable, precision: 0, delimiter: ' ') %> m²</strong></p>
+        <p>Coefficient d'occupation des sols: <strong><%= number_with_precision(@simulation.project.floor_area_ratio * 100, precision: 0, delimiter: ' ') %>%</strong></p>
+        <p>Superficie de Terrain: <strong><%= number_with_precision(@simulation.area_sqm_land, precision: 0, delimiter: ' ') %> m²</strong></p>
+      </div>
+
+      <!-- Future Project Section -->
+      <h2 class="mt-4"><i class="fas fa-building"></i> Votre projet futur</h2>
+      <div id="project-data" class="p-3 border rounded">
+        <p>Surface potentielle constructible: <strong><%= number_with_precision(@simulation.area_sqm_construction, precision: 0, delimiter: ' ') %> m²</strong> dont:</p>
+        <ul>
+          <li>Habitable: <strong><%= number_with_precision(@simulation.area_sqm_livable, precision: 0, delimiter: ' ') %> m²</strong>
+            (<%= if (@simulation.area_sqm_livable - @simulation.project.area_sqm_livable) >= 0
+                  "+"
+                else
+                  ""
+                end %><%= number_with_precision(@simulation.area_sqm_livable - @simulation.project.area_sqm_livable, precision: 0, delimiter: ' ') %> m²)
+          </li>
+          <li>Parties communes: <strong><%= number_with_precision(@simulation.area_sqm_common, precision: 0, delimiter: ' ') %> m²</strong></li>
+        </ul>
+        <p>
+          Estimation basée sur un coefficient d'occupation des sols de <strong><%= number_with_precision(@simulation.floor_area_ratio * 100, precision: 0, delimiter: ' ') %>%</strong> et <strong>R+<%= @simulation.building_height_floors - 1 %></strong> étages
+          (soit R+<%= @simulation.building_height_floors - 1 %>), correspondant aux limitations du Plan Local d'Urbanisme (PLU).
+        </p>
       </div>
     </div>
-    <div class="col-md-6">
-      <h1>Résultats de la Simulation</h1>
-      <p>
-        Surface habitable
-        <%= number_with_precision(@simulation.area_sqm_livable, precision: 0, delimiter: ' ') %> m²
-        (<%= if (@simulation.area_sqm_livable - @simulation.project.area_sqm_livable) >= 0
-              "+"
-            else
-              ""
-            end %><%= number_with_precision(@simulation.area_sqm_livable - @simulation.project.area_sqm_livable, precision: 0, delimiter: ' ') %> m²)
-      </p>
-      <p>Coefficient d'Occupation des Sols (COS) : <%= number_with_precision(@simulation.floor_area_ratio * 100, precision: 0, delimiter: ' ') %>%</p>
-      <p>Parties communes <%= number_with_precision(@simulation.area_sqm_common, precision: 0, delimiter: ' ') %> m²</p>
-      <p>Nombre d'étages <%= @simulation.building_height_floors %></p>
-      <p>
-        Prix de vente <%= number_with_precision(@simulation.price_total_livable, precision: 0, delimiter: ' ') %>€
-        (<%= number_with_precision(@city.price_per_sqm_livable, precision: 0, delimiter: ' ') %> € par m² habitable)
-      </p>
-      <p>Loyer annuel <%= number_with_precision(@simulation.price_total_rental, precision: 0, delimiter: ' ') %>€
-        (<%= number_with_precision(@city.price_per_sqm_rental, precision: 0, delimiter: ' ') %> € par m² habitable)
-      </p>
-      <p>Investissement requis <%= number_with_precision(@simulation.cost_destruction, precision: 0, delimiter: ' ') %>€ dont coût de démolition</p>
-      <p>Plus-value immobilière <%= number_with_precision(@simulation.price_total_livable - @simulation.cost_destruction, precision: 0, delimiter: ' ') %>€</p>
-      <p>
-        ROI
-        <% roi = ((@simulation.price_total_livable - @simulation.cost_destruction) / @simulation.cost_destruction - 1) * 100 %>
-        <%= if roi > 0
-              "+"
-            elsif roi < 0
-              "-"
-            else
-              ""
-            end %><%= number_with_precision(roi.abs, precision: 0, delimiter: ' ') %>%
-      </p>
+
+    <!-- Financial Results Section -->
+    <div class="col-md-6 mb-4">
+      <h2><i class="fas fa-euro-sign"></i> Résultats financiers</h2>
+      <div class="p-3 border rounded">
+        <p>
+          Prix de vente: <strong><%= number_with_precision(@simulation.price_total_livable, precision: 0, delimiter: ' ') %>€</strong>
+          (<%= number_with_precision(@city.price_per_sqm_livable, precision: 0, delimiter: ' ') %> € par m² habitable)
+        </p>
+        <p>Loyer annuel: <strong><%= number_with_precision(@simulation.price_total_rental, precision: 0, delimiter: ' ') %>€</strong>
+          (<%= number_with_precision(@city.price_per_sqm_rental, precision: 0, delimiter: ' ') %> € par m² habitable)
+        </p>
+        <p>Investissement requis: <strong><%= number_with_precision(@simulation.cost_destruction, precision: 0, delimiter: ' ') %>€</strong> dont coût de démolition</p>
+        <p>Plus-value immobilière: <strong><%= number_with_precision(@simulation.price_total_livable - @simulation.cost_destruction, precision: 0, delimiter: ' ') %>€</strong></p>
+        <p>
+          ROI:
+          <% roi = ((@simulation.price_total_livable - @simulation.cost_destruction) / @simulation.cost_destruction - 1) * 100 %>
+          <strong><%= if roi > 0
+                        "+"
+                      elsif roi < 0
+                        "-"
+                      else
+                        ""
+                      end %><%= number_with_precision(roi.abs, precision: 0, delimiter: ' ') %>%</strong>
+        </p>
+      </div>
     </div>
   </div>
-  <%= link_to 'Retour au Projet', project_path(@simulation.project), class: 'btn btn-primary' %>
-  <%= form_with model: [@simulation.project, @simulation], url: save_project_simulation_path(@simulation.project, @simulation), method: :post, local: true do |form| %>
-    <%= form.hidden_field :area_sqm_livable %>
-    <%= form.hidden_field :price_total_livable %>
-    <%= form.hidden_field :price_total_rental %>
-    <%= form.hidden_field :cost_destruction %>
-    <%= form.hidden_field :area_sqm_land %>
-    <%= form.hidden_field :floor_area_ratio %>
-    <%= form.hidden_field :area_sqm_construction %>
-    <%= form.hidden_field :area_sqm_common %>
-    <%= form.hidden_field :building_height_floors %>
-    <%= form.submit 'Save Simulation', class: 'btn btn-success' %>
-  <% end %>
+
+  <!-- Action Buttons -->
+  <div class="d-flex justify-content-between mt-4">
+    <%= link_to 'Retour au Projet', project_path(@simulation.project), class: 'btn btn-primary' %>
+    <%= form_with model: [@simulation.project, @simulation], url: save_project_simulation_path(@simulation.project, @simulation), method: :post, local: true do |form| %>
+      <%= form.hidden_field :area_sqm_livable %>
+      <%= form.hidden_field :price_total_livable %>
+      <%= form.hidden_field :price_total_rental %>
+      <%= form.hidden_field :cost_destruction %>
+      <%= form.hidden_field :area_sqm_land %>
+      <%= form.hidden_field :floor_area_ratio %>
+      <%= form.hidden_field :area_sqm_construction %>
+      <%= form.hidden_field :area_sqm_common %>
+      <%= form.hidden_field :building_height_floors %>
+      <%= form.submit 'Save Simulation', class: 'btn btn-success' %>
+    <% end %>
+  </div>
 </div>
