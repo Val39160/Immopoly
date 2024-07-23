@@ -1,4 +1,4 @@
-<div class="container-fluid bg-white w-100">
+<div  data-controller= "index-checkboxes"  class="container-fluid bg-white w-100">
   <div class="container-fluid w-100 bg-white text-center ">
     <h1 class="index-h1">1. Chercher et ajouter ses adresses</h1>
   </div>
@@ -91,7 +91,7 @@
                 <div class = "property-card-info"><%= propertie.area_sqm_land %>  m²  terrain</div>
                 <div class = "property-card-info"><%= propertie.area_sqm_livable %>  m²  habitables</div>
                   <div class= "checkbox-container">
-                    <%= check_box_tag 'property_ids[]', propertie.id, class: 'properties-checkbox' %>
+                    <%= check_box_tag 'property_ids[]', propertie.id, class: 'properties-checkbox', data: { action: "change->index-checkboxes#set-project-list" }%>
                   </div>
 
               </div>
@@ -122,6 +122,17 @@
           <%= f.text_field :project_name, label: 'Nom du projet', placeholder: 'Mon idée de projet' %>
           <%= f.submit 'Créer le projet', class: 'btn btn-primary btn-custom-text btn-custom-size '%>
           <h3>Propriétés Sélectionnées</h3>
+          <% @properties.each do |propertie| %>
+            <div class="property-card mb-3 p-3 border rounded-5 shadow-sm" id="propertie-<%= propertie.id %>">
+              <h5 class="card-title"><%= propertie.address %></h5>
+              <div class="d-flex justify-content-start m-1">
+                <div class = "property-card-info">Lot :  <%= propertie.nb_dwelling %></div>
+                <div class = "property-card-info"><%= propertie.area_sqm_land %>  m²  terrain</div>
+                <div class = "property-card-info"><%= propertie.area_sqm_livable %>  m²  habitables</div>
+
+              </div>
+            </div>
+          <% end %>
         </div>
         <div class="modal-footer">
         </div>
