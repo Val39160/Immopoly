@@ -200,6 +200,37 @@ h3.title-property-form::after {
   color: black;
 }
 .btn-custom-size {
-  padding: 30px 40px; /* Ajustez la taille du padding selon vos besoins */
-  font-size: 20px;    /* Ajustez la taille de la police selon vos besoins */
+  padding: 10px 20px; /* Ajustez la taille du padding selon vos besoins */
+  font-size: 20px;
+  margin-left: 30px;
+  border-radius: 10px;   /* Ajustez la taille de la police selon vos besoins */
+}
+
+.modal-property-card{
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  padding: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#modal-property-list-title{
+  color: black;
+  font-family: 'Gotham', sans-serif;
+  font-weight: bold;
+  position: relative;
+  display: inline-block;
+  margin-top: 40px;
+  margin-left: 75px;
+  margin-bottom: 20px;
+}
+
+#exampleModalLabel{
+  color: black;
+  font-family: 'Gotham', sans-serif;
+  font-weight: bold;
+  position: relative;
+  display: inline-block;
+
 }

@@ -8,12 +8,13 @@
     <div class="position-relative" style="width: 50%; height: 1230px; m-20">
       <!-- Search Bar -->
       <div class="position-absolute top-0 start-0 p-3" style="z-index: 1000; width: 450px;">
-        <%= form_with url: properties_path, method: :get, class: "d-flex" do %>
+        <%= form_with url: search_properties_path, method: :get, local: true, class: "d-flex" do %>
           <div class="search-bar-index">
-            <%= text_field_tag :query, params[:query], class: "form-control", placeholder: "Entrez l’adresse de votre propriété" %>
+            <%= text_field_tag :address, params[:address], class: "form-control", placeholder: "Entrez l’adresse de votre propriété", id: "address-search" %>
              <%= button_tag(type: 'submit', class: "search-index ms-2 w-90", style: "border-radius: 55%; border: none; background-color: white") do %>
              <i class="fa-solid fa-magnifying-glass" style="color: #27CE8D"></i>
              <% end %>
+             <ul id="autocomplete-results" class="list-group mt-1"></ul>
           </div>
         <% end %>
       </div>
@@ -91,7 +92,7 @@
                 <div class = "property-card-info"><%= propertie.area_sqm_land %>  m²  terrain</div>
                 <div class = "property-card-info"><%= propertie.area_sqm_livable %>  m²  habitables</div>
                   <div class= "checkbox-container">
-                    <%= check_box_tag 'property_ids[]', propertie.id, class: 'properties-checkbox', data: { action: "change->index-checkboxes#set-project-list" }%>
+                    <%= check_box_tag 'property_ids[]', propertie.id, class: 'properties-checkbox', data: { action: "change->index-checkboxes#setProjectList" }%>
                   </div>
 
               </div>
@@ -113,28 +114,26 @@
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog ">
-      <div class="modal-content bg-custom  ">
-        <div class="modal-header ">
-          <h1 class="modal-title fs-5 " id="exampleModalLabel">Créer un Projet</h1>
+      <div class="modal-content bg-custom rounded-5 ">
+        <div class="modal-header border-top-0 border-bottom-0 border-start-0 border-end-0 ">
+          <h1 class="modal-title fs-4 ms-auto " id="exampleModalLabel">Créer un Projet</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <%= f.text_field :project_name, label: 'Nom du projet', placeholder: 'Mon idée de projet' %>
+        <div class="modal-body border-top-0 border-bottom-0 border-start-0 border-end-0">
+          <%= f.text_field :project_name, label: 'Nom du projet', placeholder: 'Mon idée de projet',  style: 'width: 50%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;' %>
           <%= f.submit 'Créer le projet', class: 'btn btn-primary btn-custom-text btn-custom-size '%>
-          <h3>Propriétés Sélectionnées</h3>
+          <h4 id= "modal-property-list-title">Propriétés Sélectionnées</h4>
           <% @properties.each do |propertie| %>
-            <div class="property-card mb-3 p-3 border rounded-5 shadow-sm" id="propertie-<%= propertie.id %>">
+            <div data-index-checkboxes-target = "propertyCard"  class="modal-property-card mb-3 p-3 border rounded-5 shadow-sm d-none d-block" id="propertie-<%= propertie.id %>">
               <h5 class="card-title"><%= propertie.address %></h5>
               <div class="d-flex justify-content-start m-1">
-                <div class = "property-card-info">Lot :  <%= propertie.nb_dwelling %></div>
-                <div class = "property-card-info"><%= propertie.area_sqm_land %>  m²  terrain</div>
-                <div class = "property-card-info"><%= propertie.area_sqm_livable %>  m²  habitables</div>
+                <div class = "property-card-info"><strong><%= propertie.nb_dwelling %></strong> Lot(s)  </div>
+                <div class = "property-card-info"><strong><%= propertie.area_sqm_land %></strong>  m²  terrain</div>
+                <div class = "property-card-info"><strong><%= propertie.area_sqm_livable %></strong>  m²  habitables</div>
 
               </div>
             </div>
           <% end %>
-        </div>
-        <div class="modal-footer">
         </div>
       </div>
     </div>
