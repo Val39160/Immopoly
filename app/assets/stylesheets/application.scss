@@ -20,3 +20,41 @@
 h1 {
   font-family: 'GothamBold', sans-serif;
 }
+
+.footer {
+  background-color: #3F3F3F; /* Couleur de fond du footer */
+  padding: 40px 0; /* Espacement interne */
+  text-align: center; /* Centre le texte */
+  position: relative;
+  width: 100%;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between; /* Space between logo and links */
+  align-items: center; /* Center vertically */
+  max-width: 1200px; /* Optional: Limit width of footer content */
+  margin: 0 auto; /* Center the footer content horizontally */
+}
+
+.footer-logo img {
+  max-width: 150px; /* Taille maximale du logo */
+}
+
+.footer-links ul {
+  list-style-type: none; /* Supprime les puces de la liste */
+}
+
+.footer-links li {
+  display: inline; /* Affiche les liens en ligne */
+  margin: 0 30px 0 30px; /* Ajoute de l'espacement horizontal entre les liens */
+}
+
+.footer-links a {
+  text-decoration: none; /* Supprime le soulignement des liens */
+  color: #FFFFFF; /* Couleur des liens */
+}
+
+.footer-links a:hover {
+  text-decoration: underline; /* Ajoute un soulignement au survol */
+}

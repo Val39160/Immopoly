@@ -1,12 +1,25 @@
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://cdn.mos.cms.futurecdn.net/MNi7KjdM9nP5DcVMFAEuHQ.jpg);">
-  <div id="container" class="col-sm-8 my-3">
-    <h1 class="headline">Libérez votre potentiel.</h1>
-    <div class="search-bar">
-      <%= form_with url: search_properties_path, method: :get, local: true do %>
-        <%= text_field_tag :address, params[:address], placeholder: "Entrez l’adresse de votre propriété", class: "form-control", id: "address-search" %>
-        <%= submit_tag "Rechercher", class: "btn btn-search" %>
-      <% end %>
-      <ul id="autocomplete-results" class="list-group mt-1"></ul>
+<div id="banner-container">
+
+    <div class="banner-left-content">
+
+      <h1 class="headline">Libérez votre potentiel.</h1>
+      <p class="sub-headline">Immopoly vous permet de découvrir la valeur de votre bien immobilier<br>et les perspectives pour la faire augmenter.</p>
+
+      <div class="search-bar">
+        <%= form_with url: search_properties_path, method: :get, class: "d-flex", local: true do %>
+          <%= text_field_tag :address, params[:address], placeholder: "Entrez l’adresse de votre propriété", class: "form-control", id: "address-search" %>
+          <%= button_tag(type: 'Submit', class: "search") do %>
+            <i class="fa-solid fa-magnifying-glass" style="color: #27CE8D;"></i>
+          <% end %>
+        <% end %>
+        <ul id="autocomplete-results" class="list-group mt-1"></ul>
+      </div>
+
     </div>
+
+    <div class="banner-right-content">
+      <%= image_tag("https://cdn.mos.cms.futurecdn.net/MNi7KjdM9nP5DcVMFAEuHQ.jpg", alt: "Image banner", class: "banner-img") %>
+    </div>
+
   </div>
 </div>
