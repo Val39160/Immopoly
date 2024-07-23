@@ -14,13 +14,13 @@ City.destroy_all
 # Seed data for cities
 cities = City.create!([
   {
-    city_name: 'Vannes',
+    city_name: 'vannes',
     price_per_sqm_livable: 3815,
     price_per_sqm_land: 763,
     price_per_sqm_rental: 13
   },
   {
-    city_name: 'Villejuif',
+    city_name: 'villejuif',
     price_per_sqm_livable: 6409,
     price_per_sqm_land: 1282,
     price_per_sqm_rental: 22
@@ -37,7 +37,7 @@ users = User.create!([
     phone_number: '06 87 35 41 23',
     marital_status: 'single',
     ownership_status: 'owner',
-    postal_address: '55 avenue de la Marne, 56000 Vannes',
+    postal_address: '55 avenue de la marne 56000 vannes',
     reset_password_token: nil,
     reset_password_sent_at: nil,
     remember_created_at: nil
@@ -50,7 +50,7 @@ users = User.create!([
     phone_number: '06 87 35 41 23',
     marital_status: 'married',
     ownership_status: 'owner',
-    postal_address: '85 avenue Paul Vaillant-Couturier, 94800 Villejuif',
+    postal_address: '85 avenue paul vaillant-couturier 94800 villejuif',
     reset_password_token: nil,
     reset_password_sent_at: nil,
     remember_created_at: nil
@@ -65,7 +65,7 @@ projects = Project.create!([
     area_sqm_livable: 147,
     floor_area_ratio: 0.23,
     user_id: users.first.id,
-    project_name: 'Project in Vannes'
+    project_name: 'Project in vannes'
   },
   {
     nb_dwelling: 5,
@@ -73,7 +73,33 @@ projects = Project.create!([
     area_sqm_livable: 318,
     floor_area_ratio: 0.45,
     user_id: users.second.id,
+
     project_name: 'Project in Villejuif'
+  },
+  {
+    nb_dwelling: 7,
+    area_sqm_land: 2082,
+    area_sqm_livable: 518,
+    floor_area_ratio: 0.85,
+    user_id: users.first.id,
+    project_name: 'Project in Paris'
+  },
+  {
+    nb_dwelling: 3,
+    area_sqm_land: 1182,
+    area_sqm_livable: 218,
+    floor_area_ratio: 0.45,
+    user_id: users.first.id,
+    project_name: 'Project in La Rochelle'
+  },
+  {
+    nb_dwelling: 2,
+    area_sqm_land: 1082,
+    area_sqm_livable: 118,
+    floor_area_ratio: 0.55,
+    user_id: users.first.id,
+    project_name: 'Project in Bordaux'
+
   }
 ])
 
@@ -81,9 +107,9 @@ projects = Project.create!([
 properties_vannes = Property.create!([
   {
     city_id: cities[0].id,
-    address: '55 avenue de la Marne 56000 Vannes',
+    address: '55 avenue de la marne 56000 vannes',
     street_number: 55,
-    street_name: 'Avenue de la Marne',
+    street_name: 'avenue de la marne',
     zipcode: 56000,
     nb_dwelling: 1,
     area_sqm_land: 516,
@@ -103,9 +129,9 @@ properties_vannes = Property.create!([
 properties_villejuif = Property.create!([
   {
     city_id: cities[1].id,
-    address: '87 avenue Paul Vaillant-Couturier 94800 Villejuif',
+    address: '87 avenue paul vaillant-couturier 94800 villejuif',
     street_number: 87,
-    street_name: 'Avenue Paul Vaillant-Couturier',
+    street_name: 'avenue paul vaillant-couturier',
     zipcode: 94800,
     nb_dwelling: 3,
     area_sqm_land: 325,
@@ -122,9 +148,9 @@ properties_villejuif = Property.create!([
   },
   {
     city_id: cities[1].id,
-    address: '85 avenue Paul Vaillant-Couturier 94800 Villejuif',
+    address: '85 avenue paul vaillant-couturier 94800 villejuif',
     street_number: 85,
-    street_name: 'Avenue Paul Vaillant-Couturier',
+    street_name: 'avenue paul vaillant-couturier',
     zipcode: 94800,
     nb_dwelling: 1,
     area_sqm_land: 253,
@@ -141,9 +167,9 @@ properties_villejuif = Property.create!([
   },
   {
     city_id: cities[1].id,
-    address: '83 avenue Paul Vaillant-Couturier 94800 Villejuif',
+    address: '83 avenue paul vaillant-couturier 94800 villejuif',
     street_number: 83,
-    street_name: 'Avenue Paul Vaillant-Couturier',
+    street_name: 'avenue paul vaillant-couturier',
     zipcode: 94800,
     nb_dwelling: 5,
     area_sqm_land: 252,
@@ -160,9 +186,9 @@ properties_villejuif = Property.create!([
   },
   {
     city_id: cities[1].id,
-    address: '4 rue Griffuelhes 94800 Villejuif',
+    address: '4 rue griffuelhes 94800 villejuif',
     street_number: 4,
-    street_name: 'Rue Griffuelhes',
+    street_name: 'rue griffuelhes',
     zipcode: 94800,
     nb_dwelling: 1,
     area_sqm_land: 252,
@@ -183,7 +209,7 @@ properties_villejuif = Property.create!([
 Regulation.create!([
   {
     city_id: cities[0].id,
-    city_name: 'Vannes',
+    city_name: 'vannes',
     floor_area_ratio: 0.40,
     building_height: 3,
     housing_social: 0.20,
@@ -192,7 +218,7 @@ Regulation.create!([
   },
   {
     city_id: cities[1].id,
-    city_name: 'Villejuif',
+    city_name: 'villejuif',
     floor_area_ratio: 0.50,
     building_height: 5,
     housing_social: 0.30,
