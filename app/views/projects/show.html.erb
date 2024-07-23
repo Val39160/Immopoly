@@ -8,11 +8,8 @@
       <div id="regulations-summary">
         <% if @regulations.present? %>
           <% @regulations.each do |regulation| %>
-            <p>Coefficient d'Occupation des Sols (COS) : <%= regulation.floor_area_ratio %></p>
-            <p>Hauteur des Bâtiments : <%= regulation.building_height %> étages</p>
-            <p>Logements Sociaux : <%= regulation.housing_social %></p>
-            <p>Logements Abordables : <%= regulation.housing_affordable %></p>
-            <p>Logements à Prix de Marché : <%= regulation.housing_market_rate %></p>
+            <p>Coefficient d'Occupation des Sols (COS) <%= number_with_precision(regulation.floor_area_ratio * 100, precision: 0, delimiter: ' ') %>%</p>
+            <p>Nombre d'étage(s) autorisé(s) R+<%= regulation.building_height - 1 %> étage<%= "s" if regulation.building_height - 1 >= 2 %></p>
           <% end %>
         <% else %>
           <p>Aucune réglementation disponible pour cette ville.</p>
@@ -25,10 +22,9 @@
       <h2>Données de la Ville</h2>
       <div id="city-data">
         <% if @city.present? %>
-          <p>Nom de la Ville : <%= @city.city_name %></p>
-          <p>Prix au m² Habitable : <%= @city.price_per_sqm_livable %></p>
-          <p>Prix au m² de Terrain : <%= @city.price_per_sqm_land %></p>
-          <p>Prix au m² Locatif : <%= @city.price_per_sqm_rental %></p>
+          <p>Ville : <%= @city.city_name[0].upcase + @city.city_name[1..-1] %></p>
+          <p>Prix de vente par m² (habitable) <%= number_with_precision(@city.price_per_sqm_livable, precision: 0, delimiter: ' ') %>€</p>
+          <p>Loyer par m² (habitable) <%= number_with_precision(@city.price_per_sqm_rental, precision: 0, delimiter: ' ') %>€</p>
         <% else %>
           <p>Aucune donnée disponible pour cette ville.</p>
         <% end %>
@@ -42,11 +38,10 @@
       <div class="col-md-12">
         <h2>Données du Projet</h2>
         <div id="project-data">
-          <p>Nom du Projet : <%= @project.project_name %></p>
-          <p>Nombre de Logements : <%= @project.nb_dwelling %></p>
-          <p>Surface du Terrain (m²) : <%= @project.area_sqm_land %></p>
-          <p>Surface Habitable (m²) : <%= @project.area_sqm_livable %></p>
-          <p>Coefficient d'Occupation des Sols (COS) : <%= @project.floor_area_ratio %></p>
+          <p>Votre projet : <%= @project.project_name %></p>
+          <p>Votre terrain : <%= number_with_precision(@project.area_sqm_land, precision: 0, delimiter: ',') %> m²</p>
+          <p>Votre surface habitable : <%= number_with_precision(@project.area_sqm_livable, precision: 0, delimiter: ',') %> m²</p>
+          <p>Votre coefficient d'occupation des sols : <%= number_with_precision(@project.floor_area_ratio * 100, precision: 0, delimiter: ' ') %>%</p>
         </div>
       </div>
     </div>
@@ -54,13 +49,35 @@
     <!-- Section 4: Launch Simulation -->
     <div class="col-md-6">
       <h2>Lancer une Simulation</h2>
-      <%= form_with(url: project_simulations_path(@project), method: :post) do |form| %>
+      <%= form_with(url: project_simulations_path(@project), method: :post, id: "simulation-form") do |form| %>
         <div class="mb-3">
           <%= form.label :unit_cost, "Coût Unitaire de Construction / Démolition (par m²)" %>
-          <%= form.number_field :unit_cost, class: "form-control" %>
+          <%= form.select :unit_cost, options_for_select([['-- Sélectionnez une option --', ''], ['Basique - 1 500€', 1500], ['Standard - 2 000€', 2000], ['Haut de gamme - 2 500€', 2500]]), {}, { class: 'form-control', id: 'unit_cost' } %>
         </div>
-        <%= form.submit "Lancer la Simulation", class: "btn btn-primary" %>
+        <%= form.submit "Lancer la Simulation", class: "btn btn-primary", id: "submit-button", disabled: true %>
       <% end %>
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const unitCostInput = document.getElementById("unit_cost");
+    const submitButton = document.getElementById("submit-button");
+
+    unitCostInput.addEventListener("change", function() {
+      if (unitCostInput.value.trim() === "" || unitCostInput.value <= 0) {
+        submitButton.disabled = true;
+      } else {
+        submitButton.disabled = false;
+      }
+    });
+
+    // Initial check to enable or disable the submit button
+    if (unitCostInput.value.trim() === "" || unitCostInput.value <= 0) {
+      submitButton.disabled = true;
+    } else {
+      submitButton.disabled = false;
+    }
+  });
+</script>
