@@ -40,7 +40,8 @@
             représentant un revenu locatif annuel de
             <strong><%= number_with_precision(@city.price_per_sqm_rental * @project.area_sqm_livable * 12, precision: 0, delimiter: ' ') %>€</strong>
             et un taux de rendement brut de
-            <strong>+<%= number_with_precision((@city.price_per_sqm_rental * @project.area_sqm_livable * 12)/(@city.price_per_sqm_livable * @project.area_sqm_livable)*100, precision: 2, delimiter: ' ') %>%</strong>.
+            <!-- Added "+" sign and 2 decimal precision -->
+            <strong>+<%= number_with_precision((@city.price_per_sqm_rental * @project.area_sqm_livable * 12) / (@city.price_per_sqm_livable * @project.area_sqm_livable) * 100, precision: 2, delimiter: ' ') %>%</strong>.
           </p>
         <% else %>
           <p>Aucune donnée disponible pour cette ville.</p>
@@ -70,6 +71,7 @@
     <!-- Section 4: Launch Simulation -->
     <div class="col-md-6 mb-4">
       <h2><i class="fas fa-play-circle"></i> Votre simulation</h2>
+      <!-- Updated form_with to reflect correct project path -->
       <%= form_with(url: project_simulations_path(@project), method: :post, id: "simulation-form", class: "p-3 border rounded") do |form| %>
         <div class="mb-3">
           <%= form.label :unit_cost, "Estimer le potentiel immobilier de votre bien en achat ou locatif ainsi que le niveau d'investissement requis en coût de construction / démolition.", class: 'form-label' %>

@@ -33,70 +33,69 @@
       <div class="property-form">
         <%= simple_form_for @property do |f| %>
           <!-- Champs du formulaire -->
-            <div class="form-group">
+          <div class="form-group">
             <%= f.input :area_sqm_land, label: "Surface terrain", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
-            <div class="form-group">
+          </div>
+          <div class="form-group">
             <%= f.input :address, label: "Adresse", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
-            <div class="form-group">
+          </div>
+          <div class="form-group">
             <%= f.input :street_number, label: "Numéro d'adresse", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
-            <div class="form-group">
+          </div>
+          <div class="form-group">
             <%= f.input :street_name, label: "Nom de la rue", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
-            <div class="form-group">
+          </div>
+          <div class="form-group">
             <%= f.input :zipcode, label: "Code postal", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
-            <div class="form-group">
+          </div>
+          <div class="form-group">
             <%= f.input :building_height_floors, label: "Nombre d'étages", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
-            <div class="form-group">
+          </div>
+          <div class="form-group">
             <%= f.input :nb_rooms_per_dwelling, label: "Nombre de pièces par logement", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
-            <div class="form-group">
+          </div>
+          <div class="form-group">
             <%= f.input :energy_class, label: "Classe énergétique", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
-            <div class="form-group">
+          </div>
+          <div class="form-group">
             <%= f.input :floor_area_ratio, label: "Coefficient d'occupation des sols", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
-            <div class="form-group">
+          </div>
+          <div class="form-group">
             <%= f.input :nb_dwelling, label: "Nombre de logements", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
-            <div class="form-group">
+          </div>
+          <div class="form-group">
             <%= f.input :density_area, label: "Zone de densité", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
-            <div class="form-group">
+          </div>
+          <div class="form-group">
             <%= f.input :building_zone, label: "Zone à bâtir", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
-
+          </div>
         <% end %>
       </div>
     </div>
   </div>
 
+  <!-- Added form_with to wrap the project properties selection and creation -->
   <%= form_with model: @project do |f| %>
   <!-- Liste des propriétés -->
   <div class="container m-auto">
     <div class="container m-auto">
       <div class="index-card shadow">
         <div class="card-header bg-white d-flex justify-content-center mb-4">
-          <h3 id ="index-card-h3">Vos propriétés</p>
+          <h3 id="index-card-h3">Vos propriétés</h3>
         </div>
-        <div class="index-scroll card-body bg-white ">
-          <% @properties.each do |propertie| %>
-            <div class="property-card mb-3 p-3 border rounded-5 shadow-sm" id="propertie-<%= propertie.id %>">
-              <h5 class="card-title"><%= propertie.address %></h5>
+        <div class="index-scroll card-body bg-white">
+          <% @properties.each do |property| %> <!-- Corrected 'propertie' to 'property' -->
+            <div class="property-card mb-3 p-3 border rounded-5 shadow-sm" id="property-<%= property.id %>"> <!-- Corrected 'propertie' to 'property' -->
+              <h5 class="card-title"><%= property.address %></h5>
               <div class="d-flex justify-content-start m-1">
-                <div class = "property-card-info">Lot :  <%= propertie.nb_dwelling %></div>
-                <div class = "property-card-info"><%= propertie.area_sqm_land %>  m²  terrain</div>
-                <div class = "property-card-info"><%= propertie.area_sqm_livable %>  m²  habitables</div>
-                  <div class= "checkbox-container">
-                    <%= check_box_tag 'property_ids[]', propertie.id, class: 'properties-checkbox', data: { action: "change->index-checkboxes#setProjectList" }%>
-                  </div>
-
+                <div class="property-card-info">Lot: <%= property.nb_dwelling %></div>
+                <div class="property-card-info"><%= property.area_sqm_land %> m² terrain</div>
+                <div class="property-card-info"><%= property.area_sqm_livable %> m² habitables</div>
+                <!-- Modified check_box_tag to include project properties selection -->
+                <div class="checkbox-container">
+                  <%= check_box_tag 'project[property_ids][]', property.id, @project.properties.include?(property), class: 'properties-checkbox', data: { action: "change->index-checkboxes#setProjectList" } %>
+                </div>
               </div>
-
             </div>
           <% end %>
         </div>
@@ -113,24 +112,26 @@
 
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog ">
-      <div class="modal-content bg-custom rounded-5 ">
-        <div class="modal-header border-top-0 border-bottom-0 border-start-0 border-end-0 ">
-          <h1 class="modal-title fs-4 ms-auto " id="exampleModalLabel">Créer un Projet</h1>
+    <div class="modal-dialog">
+      <div class="modal-content bg-custom rounded-5">
+        <div class="modal-header border-top-0 border-bottom-0 border-start-0 border-end-0">
+          <h1 class="modal-title fs-4 ms-auto" id="exampleModalLabel">Créer un Projet</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body border-top-0 border-bottom-0 border-start-0 border-end-0">
-          <%= f.text_field :project_name, label: 'Nom du projet', placeholder: 'Mon idée de projet',  style: 'width: 50%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;' %>
-          <%= f.submit 'Créer le projet', class: 'btn btn-primary btn-custom-text btn-custom-size '%>
-          <h4 id= "modal-property-list-title">Propriétés Sélectionnées</h4>
-          <% @properties.each do |propertie| %>
-            <div data-index-checkboxes-target = "propertyCard"  class="modal-property-card mb-3 p-3 border rounded-5 shadow-sm d-none d-block" id="propertie-<%= propertie.id %>">
-              <h5 class="card-title"><%= propertie.address %></h5>
+          <!-- Added text_field for project name -->
+          <%= f.text_field :project_name, label: 'Nom du projet', placeholder: 'Mon idée de projet', style: 'width: 50%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;' %>
+          <!-- Added submit button for creating project -->
+          <%= f.submit 'Créer le projet', class: 'btn btn-primary btn-custom-text btn-custom-size' %>
+          <h4 id="modal-property-list-title">Propriétés Sélectionnées</h4>
+          <% @properties.each do |property| %> <!-- Corrected 'propertie' to 'property' -->
+            <!-- Modified modal to display selected properties -->
+            <div data-index-checkboxes-target="propertyCard" class="modal-property-card mb-3 p-3 border rounded-5 shadow-sm d-none d-block" id="property-<%= property.id %>">
+              <h5 class="card-title"><%= property.address %></h5>
               <div class="d-flex justify-content-start m-1">
-                <div class = "property-card-info"><strong><%= propertie.nb_dwelling %></strong> Lot(s)  </div>
-                <div class = "property-card-info"><strong><%= propertie.area_sqm_land %></strong>  m²  terrain</div>
-                <div class = "property-card-info"><strong><%= propertie.area_sqm_livable %></strong>  m²  habitables</div>
-
+                <div class="property-card-info"><strong><%= property.nb_dwelling %></strong> Lot(s)</div>
+                <div class="property-card-info"><strong><%= property.area_sqm_land %></strong> m² terrain</div>
+                <div class="property-card-info"><strong><%= property.area_sqm_livable %></strong> m² habitables</div>
               </div>
             </div>
           <% end %>
@@ -138,5 +139,5 @@
       </div>
     </div>
   </div>
-  <% end %>
+  <% end %> <!-- Closing form_with for project creation -->
 </div>
