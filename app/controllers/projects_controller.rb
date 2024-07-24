@@ -21,7 +21,7 @@ class ProjectsController < ApplicationController
     end
     @project = Project.create(user: current_user, properties: properties)
     update_metrics(@project)
-      redirect_to project_path(@project), notice: 'Project was successfully created.'
+      redirect_to project_path(@project), notice: 'Projet sauvegardé avec succès'
   end
 
   def edit
@@ -30,7 +30,7 @@ class ProjectsController < ApplicationController
   def update
     if @project.update(project_params)
       update_metrics(@project)
-      redirect_to project_path(@project), notice: 'Project was successfully updated.'
+      redirect_to project_path(@project), notice: 'Projet mis à jour avec succès'
     else
       render :edit
     end
@@ -38,7 +38,7 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
-    redirect_to projects_url, notice: 'Project was successfully destroyed.'
+    redirect_to projects_url, notice: 'Projet supprimé avec succès'
   end
 
   private
