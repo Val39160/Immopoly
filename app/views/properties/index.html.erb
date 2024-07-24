@@ -29,45 +29,49 @@
 
     <!-- Formulaire des propriétés -->
     <div class="card-simple-form ms-4 mb-5" style="width: 40%;">
-      <h3 class="title-property-form">Adresse</h3>
+      <h3 class="title-property-form"><i class="fa-solid fa-house-user" style="color: #000000;"></i>   Voici votre propriété <%= current_user.first_name  %>  : </h3>
+      <h4 class="title-property-form"><i class="fa-solid fa-location-dot" style="color: #000000;"></i>    Addresse</h4>
       <div class="property-form">
         <%= simple_form_for @property do |f| %>
           <!-- Champs du formulaire -->
+           <div class="form-group">
+            <%= f.input :address, label: false, input_html: { style: "background-color: #DCFFF3; font-weight: bold; color: black;"} %>
+            </div>
+            <h4 class="title-property-form"><i class="fa-solid fa-ruler-combined" style="color: #000000;"></i> Surface terrain (m2) </h4>
             <div class="form-group">
-            <%= f.input :area_sqm_land, label: "Surface terrain", input_html: { style: "background-color: #DCFFF3" } %>
+            <%= f.input :area_sqm_land, label: false, input_html: { style: "background-color: #DCFFF3; font-weight: bold; color: black;"  } %>
             </div>
             <div class="form-group">
-            <%= f.input :address, label: "Adresse", input_html: { style: "background-color: #DCFFF3" } %>
+            <%= f.input :street_number, :as => :hidden, input_html: { style: "background-color: #DCFFF3" } %>
             </div>
             <div class="form-group">
-            <%= f.input :street_number, label: "Numéro d'adresse", input_html: { style: "background-color: #DCFFF3" } %>
+            <%= f.input :street_name, :as => :hidden, input_html: { style: "color: #DCFFF3" } %>
             </div>
             <div class="form-group">
-            <%= f.input :street_name, label: "Nom de la rue", input_html: { style: "background-color: #DCFFF3" } %>
+            <%= f.input :zipcode, :as => :hidden, input_html: { style: "background-color: #DCFFF3" } %>
             </div>
             <div class="form-group">
-            <%= f.input :zipcode, label: "Code postal", input_html: { style: "background-color: #DCFFF3" } %>
+            <%= f.input :building_height_floors, :as => :hidden, input_html: { style: "background-color: #DCFFF3" } %>
             </div>
             <div class="form-group">
-            <%= f.input :building_height_floors, label: "Nombre d'étages", input_html: { style: "background-color: #DCFFF3" } %>
+            <%= f.input :nb_rooms_per_dwelling, :as => :hidden, input_html: { style: "background-color: #DCFFF3" } %>
+            </div>
+            <h4 class="title-property-form"><i class="fa-solid fa-bolt" style="color: #000000;"></i>   Classe energétique </h4>
+            <div class="form-group">
+            <%= f.input :energy_class, label: false, input_html: { style: "background-color: #DCFFF3; font-weight: bold; color: black;" } %>
             </div>
             <div class="form-group">
-            <%= f.input :nb_rooms_per_dwelling, label: "Nombre de pièces par logement", input_html: { style: "background-color: #DCFFF3" } %>
+            <%= f.input :floor_area_ratio, :as => :hidden, input_html: { style: "background-color: #DCFFF3" } %>
+            </div>
+            <h4 class="title-property-form"><i class="fa-solid fa-person-shelter" style="color: #000000;"></i>   Nombre de logements </h4>
+            <div class="form-group">
+            <%= f.input :nb_dwelling, label: false, input_html: { style: "background-color: #DCFFF3; font-weight: bold; color: black;" } %>
             </div>
             <div class="form-group">
-            <%= f.input :energy_class, label: "Classe énergétique", input_html: { style: "background-color: #DCFFF3" } %>
+            <%= f.input :density_area, :as => :hidden, input_html: { style: "background-color: #DCFFF3" } %>
             </div>
             <div class="form-group">
-            <%= f.input :floor_area_ratio, label: "Coefficient d'occupation des sols", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
-            <div class="form-group">
-            <%= f.input :nb_dwelling, label: "Nombre de logements", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
-            <div class="form-group">
-            <%= f.input :density_area, label: "Zone de densité", input_html: { style: "background-color: #DCFFF3" } %>
-            </div>
-            <div class="form-group">
-            <%= f.input :building_zone, label: "Zone à bâtir", input_html: { style: "background-color: #DCFFF3" } %>
+            <%= f.input :building_zone, :as => :hidden, input_html: { style: "background-color: #DCFFF3" } %>
             </div>
 
         <% end %>

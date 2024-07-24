@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
 
   def create
-    raise
+
     @project = Project.new(project_params)
     @project.user = current_user
     @project.save
