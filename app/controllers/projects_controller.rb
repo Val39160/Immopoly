@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   # Method to create a new project
   def create
+
     @project = Project.new(project_params) # Initialize a new Project object with parameters from the form
     @project.user = current_user # Associate the project with the current user
 
@@ -10,6 +11,7 @@ class ProjectsController < ApplicationController
     else
       render :new # Render the new project form again if saving fails
     end
+
   end
 
   # Method to display a specific project

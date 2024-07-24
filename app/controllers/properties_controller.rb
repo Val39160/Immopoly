@@ -1,10 +1,12 @@
 class PropertiesController < ApplicationController
 
+
+
   def index
     @properties = current_user.properties
     @property = Property.find(params[:property]) if params[:property].present?
     @project = Project.new
-    @cities = City.all
+    @cities = City.order(:city_name).pluck(:city_name, :id)
 
     @markers = @properties.geocoded.map do |property|
       {
@@ -40,9 +42,11 @@ class PropertiesController < ApplicationController
   end
 
   def create
-    @property = Property.new(property_params,)
+    @property = Property.new(property_params)
+    @property.user = current_user
+
     if @property.save!
-      redirect_to properties_path
+      redirect_to properties_path(property: @property)
     else
       render :new
     end
