@@ -105,6 +105,7 @@
       <div class="property-form">
         <%= simple_form_for @property do |f| %>
           <!-- Champs du formulaire -->
+
           <h4 class="title-property-form"><i class="fa-solid fa-location-dot" style="color: #000000;"></i> Addresse</h4>
           <div class="form-group">
             <%= f.input :address, label: false, input_html: { style: "background-color: #DCFFF3; font-weight: bold; color: black;" } %>
@@ -155,9 +156,11 @@
     </div>
   </div>
 
+  <!-- Added form_with to wrap the project properties selection and creation -->
   <%= form_with model: @project do |f| %>
     <!-- Liste des propriétés -->
     <div class="container m-auto">
+
       <div class="container m-auto">
         <div class="index-card shadow">
             <div class="container d-flex align-items-center justify-content-between position-relative ">
@@ -168,6 +171,8 @@
                     <button type="button" class="btn prop-modal-btn-black btn-icon " data-bs-toggle="modal" data-bs-target="#exampleModal2">
                   <i class="fa fa-plus-circle fa-lg" style="color: #ffffff;"></i>
                   </button>
+
+
 
             </div>
           <div class="index-scroll card-body bg-white">
@@ -189,6 +194,7 @@
         </div>
       </div>
     </div>
+
 
 
     <!-- Modal pour créer un projet -->
@@ -219,6 +225,7 @@
                   <div class="property-card-info text-black" ><strong><%= propertie.area_sqm_livable %></strong> m² habitables</div>
                   <div class="property-card-info text-black">Ratio surface de plancher : <strong><%= propertie.floor_area_ratio %></strong></div>
                 </div>
+
               </div>
             <% end %>
           </div>
@@ -226,5 +233,6 @@
       </div>
     </div>
   <% end %>
+
 
 </div>

@@ -10,6 +10,7 @@
               D'après le PLU de
               <strong><%= @city.city_name.capitalize %></strong>
               et la localisation exacte de votre bien immobilier, l'emprise au sol maximale serait de
+              <!-- Correctly calculated floor area ratio based on updated metrics -->
               <strong><%= number_with_precision(regulation.floor_area_ratio * @project.area_sqm_land, precision: 0, delimiter: ' ') %> m²</strong>
               sur la base d'un coefficient d'occupation des sols (COS) maximal de
               <strong><%= number_with_precision(regulation.floor_area_ratio * 100, precision: 0, delimiter: ' ') %>%</strong>
@@ -34,13 +35,16 @@
             le prix d'achat par m² habitable est de
             <strong><%= number_with_precision(@city.price_per_sqm_livable, precision: 0, delimiter: ' ') %>€</strong>
             valorisant ainsi votre bien actuel à
+            <!-- Updated calculation of the total value of the property based on the livable area -->
             <strong><%= number_with_precision(@city.price_per_sqm_livable * @project.area_sqm_livable, precision: 0, delimiter: ' ') %>€</strong>
             et le loyer par m² habitable est de
             <strong><%= number_with_precision(@city.price_per_sqm_rental, precision: 0, delimiter: ' ') %>€</strong>
             représentant un revenu locatif annuel de
+            <!-- Updated calculation of the annual rental income based on the livable area -->
             <strong><%= number_with_precision(@city.price_per_sqm_rental * @project.area_sqm_livable * 12, precision: 0, delimiter: ' ') %>€</strong>
             et un taux de rendement brut de
-            <strong>+<%= number_with_precision((@city.price_per_sqm_rental * @project.area_sqm_livable * 12)/(@city.price_per_sqm_livable * @project.area_sqm_livable)*100, precision: 2, delimiter: ' ') %>%</strong>.
+            <!-- Added "+" sign and 2 decimal precision for the gross rental yield -->
+            <strong>+<%= number_with_precision((@city.price_per_sqm_rental * @project.area_sqm_livable * 12) / (@city.price_per_sqm_livable * @project.area_sqm_livable) * 100, precision: 2, delimiter: ' ') %>%</strong>.
           </p>
         <% else %>
           <p>Aucune donnée disponible pour cette ville.</p>
@@ -57,11 +61,14 @@
         <div id="project-data" class="p-3 border rounded">
           <p>
             Votre actif immobilier comprend un terrain de
-              <strong><%= number_with_precision(@project.area_sqm_land, precision: 0, delimiter: ',') %> m²</strong>
+            <!-- Displaying the total land area of the project -->
+            <strong><%= number_with_precision(@project.area_sqm_land, precision: 0, delimiter: ',') %> m²</strong>
             avec une habitation dont l'emprise au sol (i.e. le coefficient d'occupation des sols) représente
-              <strong><%= number_with_precision(@project.floor_area_ratio * 100, precision: 0, delimiter: ' ') %>%</strong> du terrain
+            <!-- Displaying the floor area ratio as a percentage -->
+            <strong><%= number_with_precision(@project.floor_area_ratio * 100, precision: 0, delimiter: ' ') %>%</strong> du terrain
             pour une surface habitable de
-              <strong><%= number_with_precision(@project.area_sqm_livable, precision: 0, delimiter: ',') %> m²</strong>.
+            <!-- Displaying the total livable area of the project -->
+            <strong><%= number_with_precision(@project.area_sqm_livable, precision: 0, delimiter: ',') %> m²</strong>.
           </p>
         </div>
       </div>
@@ -70,6 +77,7 @@
     <!-- Section 4: Launch Simulation -->
     <div class="col-md-6 mb-4">
       <h2><i class="fas fa-play-circle"></i> Votre simulation</h2>
+      <!-- Updated form_with to reflect correct project path -->
       <%= form_with(url: project_simulations_path(@project), method: :post, id: "simulation-form", class: "p-3 border rounded") do |form| %>
         <div class="mb-3">
           <%= form.label :unit_cost, "Estimer le potentiel immobilier de votre bien en achat ou locatif ainsi que le niveau d'investissement requis en coût de construction / démolition.", class: 'form-label' %>

@@ -5,17 +5,17 @@ class SimulationsController < ApplicationController
 
   def create
     # Fetch related data
-    city = City.find(@project.properties.first.city_id)
-    regulation = Regulation.find_by(city: city)
-    properties = @project.properties
+    city = City.find(@project.properties.first.city_id) # Find the city related to the project's first property
+    regulation = Regulation.find_by(city: city) # Find the regulation for the city
+    properties = @project.properties # Get all properties associated with the project
 
     # Calculations
-    area_sqm_land = properties.sum(:area_sqm_land)
-    area_sqm_construction = regulation.floor_area_ratio * area_sqm_land * regulation.building_height
-    unit_cost = params[:unit_cost].to_d
-    cost_destruction = unit_cost * area_sqm_construction
-    area_sqm_common = area_sqm_construction * 0.10
-    area_sqm_livable = area_sqm_construction - area_sqm_common
+    area_sqm_land = properties.sum(:area_sqm_land) # Sum of the land area of all properties
+    area_sqm_construction = regulation.floor_area_ratio * area_sqm_land * regulation.building_height # Calculate total construction area
+    unit_cost = params[:unit_cost].to_d # Convert unit cost parameter to decimal
+    cost_destruction = unit_cost * area_sqm_construction # Calculate destruction cost
+    area_sqm_common = area_sqm_construction * 0.10 # Calculate common area as 10% of construction area
+    area_sqm_livable = area_sqm_construction - area_sqm_common # Calculate livable area
 
     # Create the simulation with calculated values
     @simulation = @project.simulations.new(
@@ -52,18 +52,18 @@ class SimulationsController < ApplicationController
   private
 
   def set_project
-    @project = Project.find(params[:project_id])
+    @project = Project.find(params[:project_id]) # Find the project by its ID from the parameters
   end
 
   def set_simulation
-    @simulation = Simulation.find(params[:id])
+    @simulation = Simulation.find(params[:id]) # Find the simulation by its ID from the parameters
   end
 
   def set_city
-    @city = @simulation.project.properties.first.city
+    @city = @simulation.project.properties.first.city # Find the city related to the simulation's project first property
   end
 
   def simulation_params
-    params.require(:simulation).permit(:area_sqm_livable, :price_total_livable, :price_total_rental, :cost_destruction, :area_sqm_land, :floor_area_ratio, :area_sqm_construction, :area_sqm_common, :building_height_floors)
+    params.require(:simulation).permit(:area_sqm_livable, :price_total_livable, :price_total_rental, :cost_destruction, :area_sqm_land, :floor_area_ratio, :area_sqm_construction, :area_sqm_common, :building_height_floors) # Permit only the allowed parameters for simulation
   end
 end
