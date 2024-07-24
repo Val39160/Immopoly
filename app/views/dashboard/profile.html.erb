@@ -1,8 +1,9 @@
 <div class="dashboard-container">
-  <h1 class="dashboard-h1">Dashboard</h1>
-  <div class="custom-container">
-    <div class="project-container">
-      <h2 class="second-header">Mes projets</h2>
+  <h1 class="dashboard-h1">Tableau de bord
+</h1>
+  <div class="dashboard-container">
+    <div class="dashboard-project-container">
+      <h2 class="dashboard-second-header"><i class="fa-solid fa-diagram-project"></i> Mes projets</h2>
       <div>
         <!-- Slider main container -->
           <div id="projectscarousel" data-bs-theme="dark" class="carousel slide">
@@ -13,22 +14,32 @@
                 <div class="carousel-item <%= 'active' if index == 0 %>">
                   <div class="d-flex justify-content-between">
                     <% package.each do |project|%>
-                      <div class="project-card">
-                        <h4 class="project-name"><%= project.project_name %></h4>
-                        <ul class="list">
-                          <li class="info">Terrain : <%= number_with_precision(project.area_sqm_land, precision: 0, delimiter: ',') %> m²</li>
-                          <li class="info">Habitable : <%= number_with_precision(project.area_sqm_livable, precision: 0, delimiter: ',') %> m²</li>
-                          <li class="info">(COS) : <%= project.floor_area_ratio %></li>
+                      <div class="dashboard-project-card">
+                        <h4 class="dashboard-project-name"><%= project.project_name %></h4>
+                        <ul class="dashboard-list">
+                          <li class="dashboard-info">Terrain : <%= number_with_precision(project.area_sqm_land, precision: 0, delimiter: ',') %> m²</li>
+                          <li class="dashboard-info">Habitable : <%= number_with_precision(project.area_sqm_livable, precision: 0, delimiter: ',') %> m²</li>
+                          <li class="dashboard-info">(COS) : <%= project.floor_area_ratio %></li>
                         </ul>
-                        <%= link_to 'Accéder au détail', project_path(project), class: 'details-button'%>
-                        <%= link_to 'Modifier', project_path(project), class: 'modify-button'%>
-                        <%= link_to project_path(project), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-button' do %>
-                          <i class="fa-solid fa-trash-can"></i>
-                        <% end %>
-                      <div>
-                        <h4 class="simulation">Dernière estimation</h4>
-                        <p class="simulation-info">Prix de vente <strong>2,126,023 €</strong></p>
-                      </div>
+                        <%= link_to 'Accéder au détail', project_path(project), class: 'dashboard-details-button'%>
+                        <%= link_to 'Modifier', project_path(project), class: 'dashboard-modify-button'%>
+                        <%= link_to 'Supprimer', project_path(project), method: :delete, data: { confirm: 'Are you sure?' }, class: 'dashboard-delete-button' %>
+                        <!-- Simulation scroll -->
+                        <div class="dashboard-scroll-card">
+                          <h4 class="dashboard-simulation">Vos simulations</h4>
+                          <div class="dashboard-simulation-section-scroll card-body bg-white">
+                            <% @projects.each do |project| %>
+                              <% project.simulations.each do |simulation| %>
+                                <div class="dashboard-simulation-info">
+                                  <p><i class="fa-solid fa-arrow-trend-up"></i> <strong><%= number_with_precision(simulation.price_total_livable, precision: 0, delimiter: ' ') %> €</strong></p>
+                                  <%= link_to project_simulation_path(project, simulation), class: 'dashboard-simulation-details-button' do%>
+                                    <i class="fa-solid fa-eye"></i>
+                                  <% end %>
+                                </div>
+                              <% end %>
+                            <% end %>
+                          </div>
+                        </div>
                       </div>
                     <% end %>
                   </div>
@@ -47,30 +58,32 @@
 
       </div>
     </div>
-    <div class="property-container">
-      <h2 class="second-header">Mes Propriétes</h2>
+    <div class="dashboard-property-container">
+      <h2 class="dashboard-second-header"><i class="fa-solid fa-house-chimney"></i> Mes Propriétes</h2>
       <div>
         <div  id="propertiescarousel" data-bs-theme="dark" class="carousel slide">
           <div class="carousel-inner">
-            <% @properties.each_slice(3).with_index do |package, index| %>
+          <% @projects.each do |project| %>
+            <% project.properties.each_slice(3).with_index do |package, index| %>
               <div class="carousel-item d-flex justify-content-between <%= 'active' if index == 0 %>">
                 <% package.each do |property| %>
-                  <div class="project-card">
-                      <h4 class="property-name"><%= property.address %></h4>
-                      <ul class="list">
-                        <li class="info">Terrain : <%= number_with_precision(property.area_sqm_land, precision: 0, delimiter: ',') %> m²</li>
-                        <li class="info">Habitable : <%= number_with_precision(property.area_sqm_livable, precision: 0, delimiter: ',') %> m²</li>
-                        <li class="info">(COS) : <%= property.floor_area_ratio %></li>
+                  <div class="dashboard-project-card">
+                      <h4 class="dashboard-property-name"><%= property.address %></h4>
+                      <ul class="dashboard-list">
+                        <li class="dashboard-info">Terrain : <%= number_with_precision(property.area_sqm_land, precision: 0, delimiter: ',') %> m²</li>
+                        <li class="dashboard-info">Habitable : <%= number_with_precision(property.area_sqm_livable, precision: 0, delimiter: ',') %> m²</li>
+                        <li class="dashboard-info">(COS) : <%= property.floor_area_ratio %></li>
                       </ul>
-                      <%= link_to 'Accéder au détail', property_path(property), class: 'details-button'%>
-                      <%= link_to 'Modifier', edit_property_path(property), class: 'modify-button'%>
-                      <%= link_to property_path(property), method: :delete, data: { confirm: 'Are you sure?' }, class: 'delete-button' do %>
+                      <%= link_to 'Accéder au détail', property_path(property), class: 'dashboard-details-button'%>
+                      <%= link_to 'Modifier', edit_property_path(property), class: 'dashboard-modify-button'%>
+                      <%= link_to property_path(property), method: :delete, data: { confirm: 'Are you sure?' }, class: 'dashboard-delete-button' do %>
                         <i class="fa-solid fa-trash-can"></i>
                       <% end %>
                   </div>
                 <% end %>
               </div>
             <% end %>
+          <% end %>
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#propertiescarousel" data-bs-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>

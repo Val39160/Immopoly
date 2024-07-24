@@ -57,51 +57,7 @@ users = User.create!([
   }
 ])
 
-# Seed data for projects
-projects = Project.create!([
-  {
-    nb_dwelling: 1,
-    area_sqm_land: 516,
-    area_sqm_livable: 147,
-    floor_area_ratio: 0.23,
-    user_id: users.first.id,
-    project_name: 'Project in vannes'
-  },
-  {
-    nb_dwelling: 5,
-    area_sqm_land: 1082,
-    area_sqm_livable: 318,
-    floor_area_ratio: 0.45,
-    user_id: users.second.id,
 
-    project_name: 'Project in Villejuif'
-  },
-  {
-    nb_dwelling: 7,
-    area_sqm_land: 2082,
-    area_sqm_livable: 518,
-    floor_area_ratio: 0.85,
-    user_id: users.first.id,
-    project_name: 'Project in Paris'
-  },
-  {
-    nb_dwelling: 3,
-    area_sqm_land: 1182,
-    area_sqm_livable: 218,
-    floor_area_ratio: 0.45,
-    user_id: users.first.id,
-    project_name: 'Project in La Rochelle'
-  },
-  {
-    nb_dwelling: 2,
-    area_sqm_land: 1082,
-    area_sqm_livable: 118,
-    floor_area_ratio: 0.55,
-    user_id: users.first.id,
-    project_name: 'Project in Bordaux'
-
-  }
-])
 
 # Seed data for properties without associating with projects
 properties_vannes = Property.create!([
@@ -121,7 +77,7 @@ properties_vannes = Property.create!([
     building_height_floors: 2,
     nb_rooms_per_dwelling: 4,
     energy_class: 'G',
-    project_id: projects[0].id,
+    project_id: nil,
     user_id: users.first.id
   },
   {
@@ -140,7 +96,7 @@ properties_vannes = Property.create!([
     building_height_floors: 2,
     nb_rooms_per_dwelling: 4,
     energy_class: 'G',
-    project_id: projects[0].id,
+    project_id: nil,
     user_id: users.first.id
   }
 ])
@@ -162,7 +118,7 @@ properties_villejuif = Property.create!([
     building_height_floors: 3,
     nb_rooms_per_dwelling: 6,
     energy_class: 'G',
-    project_id: projects[1].id,
+    project_id: nil,
     user_id: users.second.id
   },
   {
@@ -181,7 +137,7 @@ properties_villejuif = Property.create!([
     building_height_floors: 2,
     nb_rooms_per_dwelling: 4,
     energy_class: 'G',
-    project_id: projects[1].id,
+    project_id: nil,
     user_id: users.second.id
   },
   {
@@ -200,7 +156,7 @@ properties_villejuif = Property.create!([
     building_height_floors: nil,
     nb_rooms_per_dwelling: nil,
     energy_class: 'G',
-    project_id: projects[1].id,
+    project_id: nil,
     user_id: users.second.id
   },
   {
@@ -219,7 +175,7 @@ properties_villejuif = Property.create!([
     building_height_floors: 1,
     nb_rooms_per_dwelling: 2,
     energy_class: 'G',
-    project_id: projects[1].id,
+    project_id: nil,
     user_id: users.second.id
   }
 ])

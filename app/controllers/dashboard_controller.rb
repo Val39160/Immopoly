@@ -1,6 +1,5 @@
 class DashboardController < ApplicationController
   def profile
-    @projects = Project.where(user: current_user)
-    @properties = Property.where(project: @projects)
+    @projects = Project.where(user_id: current_user.id)
   end
 end
