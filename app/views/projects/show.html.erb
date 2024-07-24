@@ -62,13 +62,13 @@
           <p>
             Votre actif immobilier comprend un terrain de
             <!-- Displaying the total land area of the project -->
-            <strong><%= number_with_precision(@project.area_sqm_land, precision: 0, delimiter: ',') %> m²</strong>
+            <strong><%= number_with_precision(@project.area_sqm_land, precision: 0, delimiter: ' ') %> m²</strong>
             avec une habitation dont l'emprise au sol (i.e. le coefficient d'occupation des sols) représente
             <!-- Displaying the floor area ratio as a percentage -->
             <strong><%= number_with_precision(@project.floor_area_ratio * 100, precision: 0, delimiter: ' ') %>%</strong> du terrain
             pour une surface habitable de
             <!-- Displaying the total livable area of the project -->
-            <strong><%= number_with_precision(@project.area_sqm_livable, precision: 0, delimiter: ',') %> m²</strong>.
+            <strong><%= number_with_precision(@project.area_sqm_livable, precision: 0, delimiter: ' ') %> m²</strong>.
           </p>
         </div>
       </div>
@@ -89,18 +89,14 @@
   </div>
 </div>
 
-
-
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
+  // document.addEventListener("DOMContentLoaded", function() {
     const unitCostInput = document.getElementById("unit_cost");
     const submitButton = document.getElementById("submit-button");
 
     unitCostInput.addEventListener("change", function() {
-      submitButton.disabled = unitCostInput.value.trim() === "" || unitCostInput.value <= 0;
+      console.log(unitCostInput.value);
+      submitButton.disabled = unitCostInput.value.trim() === "";
     });
-
-    // Initial check to enable or disable the submit button
-    submitButton.disabled = unitCostInput.value.trim() === "" || unitCostInput.value <= 0;
-  });
+  // });
 </script>

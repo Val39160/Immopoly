@@ -1,7 +1,5 @@
 class PropertiesController < ApplicationController
 
-
-
   def index
     @properties = current_user.properties
     @property = Property.find(params[:property]) if params[:property].present?
