@@ -63,8 +63,7 @@
       <div>
         <div  id="propertiescarousel" data-bs-theme="dark" class="carousel slide">
           <div class="carousel-inner">
-          <% @projects.each do |project| %>
-            <% project.properties.each_slice(3).with_index do |package, index| %>
+            <% @properties.each_slice(3).with_index do |package, index| %>
               <div class="carousel-item d-flex justify-content-between <%= 'active' if index == 0 %>">
                 <% package.each do |property| %>
                   <div class="dashboard-project-card">
@@ -83,7 +82,6 @@
                 <% end %>
               </div>
             <% end %>
-          <% end %>
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#propertiescarousel" data-bs-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
