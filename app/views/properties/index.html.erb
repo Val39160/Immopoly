@@ -3,18 +3,26 @@
       <div class="modal-dialog">
         <div class="modal-content modal-content bg-custom rounded-5">
           <div class="modal-header border-top-0 border-bottom-0 border-start-0 border-end-0">
-            <h5 class="modal-title" id="exampleModalLabel">Créer une nouvelle propriété</h5>
+            <h1 class="modal-title fs-4 ms-auto" id="exampleModalLabel">Créer une nouvelle propriété</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <%= simple_form_for @property do |f| %>
+            <%= simple_form_for Property.new do |f| %>
             <h4 class="title-property-form"><i class="fa-solid fa-location-dot" style="color: #000000;"></i> Addresse</h4>
           <div class="form-group">
             <%= f.input :address, label: false, input_html: { style: "background-color: white; font-weight: bold; color: black;" } %>
           </div>
+          <h4 class="title-property-form"><i class="fa-solid fa-city" style="color: #000000;"></i> Ville</h4>
+          <div class="form-group">
+            <%= f.input :city_id, collection: @cities, label: false, as: :select, include_blank: 'Selectionner la ville', input_html: { class: 'custom-city-select' }  %>
+          </div>
           <h4 class="title-property-form"><i class="fa-solid fa-ruler-combined" style="color: #000000;"></i> Surface terrain (m2)</h4>
           <div class="form-group">
             <%= f.input :area_sqm_land, label: false, input_html: { style: "background-color: white; font-weight: bold; color: black;" } %>
+          </div>
+             <h4 class="title-property-form"><i class="fa-solid fa-ruler-combined" style="color: #000000;"></i> Surface habitable (m2)</h4>
+          <div class="form-group">
+            <%= f.input :area_sqm_livable, label: false, input_html: { style: "background-color: white" } %>
           </div>
           <div class="form-group">
             <%= f.input :street_number, :as => :hidden, input_html: { style: "background-color: white" } %>
@@ -31,14 +39,15 @@
           </div>
           <h4 class="title-property-form"><i class="fa-solid fa-calculator" style="color: #000000;"></i> Nombre de pièces par logement</h4>
           <div class="form-group">
-            <%= f.input :nb_rooms_per_dwelling, :as => :hidden, input_html: { style: "background-color: white" } %>
+            <%= f.input :nb_rooms_per_dwelling, label: false, input_html: { style: "background-color: white" } %>
           </div>
           <h4 class="title-property-form"><i class="fa-solid fa-bolt" style="color: #000000;"></i> Classe energétique</h4>
           <div class="form-group">
             <%= f.input :energy_class, label: false, input_html: { style: "background-color: white; font-weight: bold; color: black;" } %>
           </div>
+          <h4 class="title-property-form"><i class="fa-solid fa-divide" style="color: #000000;"></i> Ratio surface de plancher</h4>
           <div class="form-group">
-            <%= f.input :floor_area_ratio, :as => :hidden, input_html: { style: "background-color: white" } %>
+            <%= f.input :floor_area_ratio, label: false, input_html: { style: "background-color: white" } %>
           </div>
           <h4 class="title-property-form"><i class="fa-solid fa-person-shelter" style="color: #000000;"></i> Nombre de logements</h4>
           <div class="form-group">
@@ -50,7 +59,9 @@
           <div class="form-group">
             <%= f.input :building_zone, :as => :hidden, input_html: { style: "background-color: white" } %>
           </div>
-              <%= f.submit 'Créer la propriété"', class: 'btn btn-primary btn-custom-text btn-custom-size'  %>
+              <div class="d-flex justify-content-center">
+              <%= f.submit 'Créer la propriété', class: 'btn btn-primary btn-custom-text rounded-3 p-25 mt-10 '  %>
+              </div>
             </div>
           <% end %>
 
@@ -105,6 +116,10 @@
           <div class="form-group">
             <%= f.input :street_number, :as => :hidden, input_html: { style: "background-color: #DCFFF3" } %>
           </div>
+          <h4 class="title-property-form"><i class="fa-solid fa-ruler-combined" style="color: #000000;"></i> Surface habitable (m2)</h4>
+          <div class="form-group">
+            <%= f.input :area_sqm_livable, label: false, input_html: { style: "background-color: #DCFFF3" } %>
+          </div>
           <div class="form-group">
             <%= f.input :street_name, :as => :hidden, input_html: { style: "color: #DCFFF3" } %>
           </div>
@@ -117,16 +132,17 @@
           <div class="form-group">
             <%= f.input :nb_rooms_per_dwelling, :as => :hidden, input_html: { style: "background-color: #DCFFF3" } %>
           </div>
-          <h4 class="title-property-form"><i class="fa-solid fa-bolt" style="color: #000000;"></i> Classe energétique</h4>
+          <!--<h4 class="title-property-form"><i class="fa-solid fa-bolt" style="color: #000000;"></i> Classe energétique</h4>-->
           <div class="form-group">
-            <%= f.input :energy_class, label: false, input_html: { style: "background-color: #DCFFF3; font-weight: bold; color: black;" } %>
+            <%= f.input :energy_class, :as => :hidden, input_html: { style: "background-color: #DCFFF3; font-weight: bold; color: black;" } %>
           </div>
+          <h4 class="title-property-form"><i class="fa-solid fa-divide" style="color: #000000;"></i> Ratio surface de plancher</h4>
           <div class="form-group">
-            <%= f.input :floor_area_ratio, :as => :hidden, input_html: { style: "background-color: #DCFFF3" } %>
+            <%= f.input :floor_area_ratio, label: false, input_html: { style: "background-color: #DCFFF3" } %>
           </div>
-          <h4 class="title-property-form"><i class="fa-solid fa-person-shelter" style="color: #000000;"></i> Nombre de logements</h4>
+          <!--<h4 class="title-property-form"><i class="fa-solid fa-person-shelter" style="color: #000000;"></i> Nombre de logements</h4>-->
           <div class="form-group">
-            <%= f.input :nb_dwelling, label: false, input_html: { style: "background-color: #DCFFF3; font-weight: bold; color: black;" } %>
+            <%= f.input :nb_dwelling, :as => :hidden, input_html: { style: "background-color: #DCFFF3; font-weight: bold; color: black;" } %>
           </div>
           <div class="form-group">
             <%= f.input :density_area, :as => :hidden, input_html: { style: "background-color: #DCFFF3" } %>
@@ -159,9 +175,9 @@
               <div class="property-card mb-3 p-3 border rounded-5 shadow-sm" id="propertie-<%= propertie.id %>">
                 <h5 class="card-title"><%= propertie.address %></h5>
                 <div class="d-flex justify-content-start m-1">
-                  <div class="property-card-info text-black"><i class="fa-solid fa-person-shelter" style="color: #000000;"></i> <strong>Nb logements: <%= propertie.nb_dwelling %></strong></div>
-                  <div class="property-card-info text-black"><i class="fa-solid fa-ruler-combined" style="color: #000000;"></i> <strong>Surface terrain: <%= propertie.area_sqm_land %> m2</strong></div>
-                  <div class="property-card-info text-black"><i class="fa-solid fa-bolt" style="color: #000000;"></i> <strong>Classe energétique: <%= propertie.energy_class %></strong> </div>
+                  <div class="property-card-info text-black"><i class="fa-solid fa-ruler-combined" style="color: #000000;"></i> <strong>Surface terrain : <%= propertie.area_sqm_land %> m2</strong></div>
+                  <div class="property-card-info text-black"><i class="fa-solid fa-ruler-combined" style="color: #000000;"></i> <strong>Surface habitable: <%= propertie.area_sqm_livable %> m2</strong></div>
+                  <div class="property-card-info text-black"><i class="fa-solid fa-divide" style="color: #000000;"></i> <strong>Ratio surface de plancher <%= propertie.floor_area_ratio %></strong> </div>
                   <div class="checkbox-container">
                     <%= check_box_tag 'property_ids[]', propertie.id, class: 'properties-checkbox', data: { action: "change->index-checkboxes#setProjectList" } %>
                   </div>
@@ -177,15 +193,15 @@
 
     <!-- Modal pour créer un projet -->
     <div class="container m-auto text-center">
-      <button type="button" class="btn btn-primary m-3 btn-custom-text p-3 w-150" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <button type="button" class="btn btn-primary m-3 btn-custom-text p-3 w-150 rounded-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Créer un projet
       </button>
     </div>
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content bg-custom rounded-5">
+      <div class="modal-dialog custom-project-modal-width">
+        <div class="modal-content bg-custom rounded-5 w-600px">
           <div class="modal-header border-top-0 border-bottom-0 border-start-0 border-end-0">
             <h1 class="modal-title fs-4 ms-auto" id="exampleModalLabel">Créer un Projet</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -198,9 +214,10 @@
               <div data-index-checkboxes-target="propertyCard" class="modal-property-card mb-3 p-3 border rounded-5 shadow-sm d-none d-block" id="propertie-<%= propertie.id %>">
                 <h5 class="card-title"><%= propertie.address %></h5>
                 <div class="d-flex justify-content-start m-1">
-                  <div class="property-card-info"><strong><%= propertie.nb_dwelling %></strong> Lot(s)</div>
-                  <div class="property-card-info"><strong><%= propertie.area_sqm_land %></strong> m² terrain</div>
-                  <div class="property-card-info"><strong><%= propertie.area_sqm_livable %></strong> m² habitables</div>
+                  <!--<div class="property-card-info"><strong><%= propertie.nb_dwelling %></strong> Lot(s)</div>-->
+                  <div class="property-card-info text-black"><strong><%= propertie.area_sqm_land %></strong> m² terrain</div>
+                  <div class="property-card-info text-black" ><strong><%= propertie.area_sqm_livable %></strong> m² habitables</div>
+                  <div class="property-card-info text-black">Ratio surface de plancher : <strong><%= propertie.floor_area_ratio %></strong></div>
                 </div>
               </div>
             <% end %>
