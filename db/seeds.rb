@@ -77,7 +77,7 @@ properties_vannes = Property.create!([
     building_height_floors: 2,
     nb_rooms_per_dwelling: 4,
     energy_class: 'G',
-    project_id: projects[0].id,
+    project_id: nil,
     user_id: users.first.id
   },
   {
@@ -96,7 +96,7 @@ properties_vannes = Property.create!([
     building_height_floors: 2,
     nb_rooms_per_dwelling: 4,
     energy_class: 'G',
-    project_id: projects[0].id,
+    project_id: nil,
     user_id: users.first.id
   }
 ])
@@ -118,7 +118,7 @@ properties_villejuif = Property.create!([
     building_height_floors: 3,
     nb_rooms_per_dwelling: 6,
     energy_class: 'G',
-    project_id: projects[1].id,
+    project_id: nil,
     user_id: users.second.id
   },
   {
@@ -137,7 +137,7 @@ properties_villejuif = Property.create!([
     building_height_floors: 2,
     nb_rooms_per_dwelling: 4,
     energy_class: 'G',
-    project_id: projects[1].id,
+    project_id: nil,
     user_id: users.second.id
   },
   {
@@ -156,7 +156,7 @@ properties_villejuif = Property.create!([
     building_height_floors: nil,
     nb_rooms_per_dwelling: nil,
     energy_class: 'G',
-    project_id: projects[1].id,
+    project_id: nil,
     user_id: users.second.id
   },
   {
@@ -175,7 +175,7 @@ properties_villejuif = Property.create!([
     building_height_floors: 1,
     nb_rooms_per_dwelling: 2,
     energy_class: 'G',
-    project_id: projects[1].id,
+    project_id: nil,
     user_id: users.second.id
   }
 ])
