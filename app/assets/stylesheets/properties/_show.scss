@@ -42,8 +42,20 @@
   border: none;
   border-radius: 5px;
   padding: 30px;
-  margin: 142px;
+  margin: 124px;
   text-decoration: none;
   font-size: 18px;
   position: relative;
+}
+
+.property-show-address {
+  font-family: 'Gotham';
+  font-size: 25px;
+  border-bottom: 2px solid #3BFFDB;
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.property-info-container {
+  margin-bottom: 50px;
 }

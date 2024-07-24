@@ -12,7 +12,7 @@
               <% @projects.each_slice(3).with_index do |package, index| %>
                 <!-- Slides -->
                 <div class="carousel-item <%= 'active' if index == 0 %>">
-                  <div class="d-flex justify-content-between">
+                  <div class="d-flex justify-content-around">
                     <% package.each do |project|%>
                       <div class="dashboard-project-card">
                         <h4 class="dashboard-project-name"><%= project.project_name %></h4>
@@ -64,7 +64,7 @@
         <div  id="propertiescarousel" data-bs-theme="dark" class="carousel slide">
           <div class="carousel-inner">
             <% @properties.each_slice(3).with_index do |package, index| %>
-              <div class="carousel-item d-flex justify-content-between <%= 'active' if index == 0 %>">
+              <div class="carousel-item d-flex justify-content-around <%= 'active' if index == 0 %>">
                 <% package.each do |property| %>
                   <div class="dashboard-project-card">
                       <h4 class="dashboard-property-name"><%= property.address %></h4>
