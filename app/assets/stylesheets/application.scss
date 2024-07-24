@@ -11,7 +11,6 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
-@import 'pages/home';  // Include the home.scss file from pages folder
 @import "properties/index";
 @import "properties/new";
 @import "properties/show";
@@ -43,6 +42,7 @@ h1 {
 }
 
 .footer-links ul {
+  margin: 0;
   list-style-type: none; /* Supprime les puces de la liste */
 }
 

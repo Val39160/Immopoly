@@ -2,8 +2,8 @@
   <div class="row">
     <!-- Section 1: Summary of Applicable Regulations -->
     <div class="col-md-6 mb-4">
-      <h2><i class="fas fa-gavel"></i> Plan Local d'Urbanisme (PLU)</h2>
       <div id="regulations-summary" class="p-3 border rounded">
+      <h2><i class="fas fa-gavel"></i> Plan Local d'Urbanisme (PLU)</h2>
         <% if @regulations.present? %>
           <% @regulations.each do |regulation| %>
             <p>
@@ -25,8 +25,8 @@
 
     <!-- Section 2: City Data -->
     <div class="col-md-6 mb-4">
-      <h2><i class="fas fa-city"></i> Votre estimation actuelle</h2>
       <div id="city-data" class="p-3 border rounded">
+      <h2><i class="fas fa-city"></i> Votre estimation actuelle</h2>
         <% if @city.present? %>
           <p>
             Actuellement, à
@@ -53,8 +53,8 @@
     <div class="col-md-6 mb-4">
       <!-- Section 3: Project Data -->
       <div class="col-md-12">
-        <h2><i class="fas fa-project-diagram"></i> Votre projet</h2>
         <div id="project-data" class="p-3 border rounded">
+        <h2><i class="fas fa-project-diagram"></i> Votre projet</h2>
           <p>
             Votre actif immobilier comprend un terrain de
               <strong><%= number_with_precision(@project.area_sqm_land, precision: 0, delimiter: ',') %> m²</strong>
@@ -69,8 +69,8 @@
 
     <!-- Section 4: Launch Simulation -->
     <div class="col-md-6 mb-4">
-      <h2><i class="fas fa-play-circle"></i> Votre simulation</h2>
       <%= form_with(url: project_simulations_path(@project), method: :post, id: "simulation-form", class: "p-3 border rounded") do |form| %>
+      <h2><i class="fas fa-play-circle"></i> Votre simulation</h2>
         <div class="mb-3">
           <%= form.label :unit_cost, "Estimer le potentiel immobilier de votre bien en achat ou locatif ainsi que le niveau d'investissement requis en coût de construction / démolition.", class: 'form-label' %>
           <%= form.select :unit_cost, options_for_select([['-- Sélectionnez une option --', ''], ['Basique - 1 500€', 1500], ['Standard - 2 000€', 2000], ['Haut de gamme - 2 500€', 2500]]), {}, { class: 'form-select', id: 'unit_cost' } %>
@@ -80,6 +80,8 @@
     </div>
   </div>
 </div>
+
+
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {

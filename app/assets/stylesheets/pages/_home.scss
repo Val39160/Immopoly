@@ -1,12 +1,5 @@
 /* app/assets/stylesheets/pages/_home.scss */
 
-// .banner {
-//   background-size: cover;
-//   background-position: center;
-//   padding: 225px 0;
-//   height: 650px;
-// }
-
 .headline {
   font-size: 50px;
   font-weight: 700;
@@ -56,17 +49,26 @@
 }
 
 .search-bar {
+  position: relative;
   display: flex;
   width: 540px;
 }
 
+.search-bar form {
+  width: 70%;
+}
+
 .search-bar .form-control {
-  flex-grow: 1; /* Allow the text field to grow */
+  flex-grow: 1;
+  padding: 1em; /* Adjust padding as needed */
+}
+#address-search::placeholder {
+  font-size: 0.9rem; /* Adjust placeholder font size as needed */
 }
 
 .form-control {
-  border-radius: 30px;
-  padding-right: 40px; /* Adjust for the search icon */
+  border-radius: 40px;
+  padding-right: 140px; /* Adjust for the search icon */
 }
 
 .autocomplete-container {
@@ -74,12 +76,14 @@
 }
 
 #autocomplete-results {
-  position: absolute;
-  top: 45px;
-  width: 100%;
-  z-index: 1000;
-  background-color: white;
-  border-radius: 0 0 5px 5px;
+  position: absolute; /* Position it absolutely within the search bar container */
+  top: 100%; /* Place it right below the search bar */
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Ensure it appears above other elements */
+  background-color: #fff; /* Background color for the dropdown */
+  max-height: 200px; /* Optional: Limit the height of the dropdown */
+  overflow-y: auto; /* Optional: Add scroll if the content exceeds max height */
 }
 
 #autocomplete-results li {
