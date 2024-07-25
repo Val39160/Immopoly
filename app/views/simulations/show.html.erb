@@ -2,10 +2,10 @@
   <h2> Votre potentiel immobilier en chiffres </h2>
 
   <div class="simulation-row">
-    <div class="simulation-col simulation-col-1">
+    <div class="simulation-col simulation-col-2 custom-simulation-show-card-size">
       <p><strong><%= price_ratio = number_with_precision(@simulation.price_total_livable/(@city.price_per_sqm_livable * @project.area_sqm_livable), precision: 1, delimiter: ' ') %>x</strong></p>
     </div>
-    <div class="simulation-col simulation-col-2">
+    <div class="simulation-col simulation-col-2 custom-simulation-show-card-size">
       <p>
         <strong><%= price_total_livable = number_with_precision(@simulation.price_total_livable, precision: 0, delimiter: ' ') %>€</strong>
         en valeur foncière soit <strong><%= price_ratio %>x</strong> la valeur initiale de votre bien !
@@ -14,10 +14,10 @@
   </div>
 
   <div class="simulation-row">
-    <div class="simulation-col simulation-col-1">
+    <div class="simulation-col simulation-col-2 custom-simulation-show-card-size">
       <p><strong><%= rental_return_simul = number_with_precision(@simulation.price_total_rental / @simulation.price_total_livable * 100, precision: 2, delimiter: ' ') %>%</strong></p>
     </div>
-    <div class="simulation-col simulation-col-2">
+    <div class="simulation-col simulation-col-2 custom-simulation-show-card-size">
       <p>
         <strong><%= price_total_rental = number_with_precision(@simulation.price_total_rental, precision: 0, delimiter: ' ') %>€</strong>
         en valeur locative annualisé soit un taux de rendement brut de <strong><%= rental_return_simul %>%</strong>
@@ -27,7 +27,7 @@
   </div>
 
   <div class="simulation-row">
-    <div class="simulation-col simulation-col-1">
+    <div class="simulation-col simulation-col-2 custom-simulation-show-card-size">
       <p>
         <% roi = ((@simulation.price_total_livable - @simulation.cost_destruction) / @simulation.cost_destruction - 1) * 100 %>
         <strong>
@@ -35,7 +35,7 @@
         </strong>
       </p>
     </div>
-    <div class="simulation-col simulation-col-2">
+    <div class="simulation-col simulation-col-2 custom-simulation-show-card-size">
       <p>
         Dans l'hypothèse d'une vente totale, le retour sur investissement de votre projet immobilier serait de
         <strong><%= roi > 0 ? "+" : roi < 0 ? "-" : "" %><%= number_with_precision(roi.abs, precision: 0, delimiter: ' ') %>%</strong>
@@ -48,13 +48,13 @@
   </div>
 
   <div class="simulation-row">
-    <div class="simulation-col simulation-col-1">
+    <div class="simulation-col simulation-col-2 custom-simulation-show-card-size">
       <p>
         <strong><%= number_with_precision(@simulation.area_sqm_livable, precision: 0, delimiter: ' ') %> m²</strong>
         (<%= @simulation.area_sqm_livable - @simulation.project.area_sqm_livable >= 0 ? "+" : "" %><%= number_with_precision(@simulation.area_sqm_livable - @simulation.project.area_sqm_livable, precision: 0, delimiter: ' ') %> m²)
       </p>
     </div>
-    <div class="simulation-col simulation-col-2">
+    <div class="simulation-col simulation-col-2 custom-simulation-show-card-size">
       <p>Content for the second column, fourth row</p>
     </div>
   </div>

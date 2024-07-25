@@ -75,7 +75,7 @@
 
 <div data-controller="index-checkboxes" class="container-fluid bg-white w-100">
   <div class="container-fluid w-100 bg-white text-center">
-      <h1 class="index-h1"> Votre recherche :</h1>
+      <h1 class="index-h1"> Votre recherche</h1>
   </div>
 
   <div class="d-flex m-5">
@@ -84,7 +84,7 @@
       <div class="position-absolute top-0 start-0 p-3" style="z-index: 1000; width: 450px;">
         <%= form_with url: search_properties_path, method: :get, local: true, class: "d-flex" do %>
           <div class="search-bar-index">
-            <%= text_field_tag :address, params[:address], class: "form-control fw-bolder", style: "color: black;", placeholder: "Entrez l’adresse de votre propriété", id: "address-search" %>
+            <%= text_field_tag :address, params[:address], class: "form-control fw-bolder", style: "color: black;", placeholder: "Adresse de votre propriété", id: "address-search" %>
             <%= button_tag(type: 'submit', class: "search-index ms-2 w-90", style: "border-radius: 55%; border: none; background-color: white") do %>
               <i class="fa-solid fa-magnifying-glass" style="color: #27CE8D"></i>
             <% end %>
@@ -100,7 +100,7 @@
 
     <!-- Formulaire des propriétés -->
     <div class="card-simple-form ms-4 mb-5">
-      <h3 class="title-property-form"><i class="fa-solid fa-house-user" style="color: #000000;"></i> Voici votre propriété <%= current_user.first_name %>:</h3>
+      <h3 class="title-property-form"><i class="fa-solid fa-house-user" style="color: #000000;"></i> Votre propriété <%= current_user.first_name %></h3>
 
       <div class="property-form">
         <%= simple_form_for @property do |f| %>
@@ -137,7 +137,7 @@
           <div class="form-group">
             <%= f.input :energy_class, :as => :hidden, input_html: { style: "background-color: #DCFFF3; font-weight: bold; color: black;" } %>
           </div>
-          <h4 class="title-property-form"><i class="fa-solid fa-divide" style="color: #000000;"></i> Ratio surface de plancher</h4>
+          <h4 class="title-property-form"><i class="fa-solid fa-divide" style="color: #000000;"></i> Coeff d'occupation des sols</h4>
           <div class="form-group">
             <%= f.input :floor_area_ratio, label: false, input_html: { style: "background-color: #DCFFF3" } %>
           </div>
@@ -156,7 +156,7 @@
     </div>
   </div>
     <div class="container-fluid w-100 bg-white text-center">
-      <h1 class="index-h1">Sélectionnez les propriétés pour votre projet :</h1>
+      <h1 class="index-h1">Sélectionnez les propriétés pour votre projet</h1>
     </div>
   <!-- Added form_with to wrap the project properties selection and creation -->
   <%= form_with model: @project do |f| %>
@@ -184,7 +184,7 @@
                 <div class="d-flex justify-content-start m-1">
                   <div class="property-card-info text-black"><i class="fa-solid fa-ruler-combined" style="color: #000000;"></i> <strong>Surface terrain : <%= propertie.area_sqm_land %> m2</strong></div>
                   <div class="property-card-info text-black"><i class="fa-solid fa-ruler-combined" style="color: #000000;"></i> <strong>Surface habitable: <%= propertie.area_sqm_livable %> m2</strong></div>
-                  <div class="property-card-info text-black"><i class="fa-solid fa-divide" style="color: #000000;"></i> <strong>Ratio surface de plancher <%= propertie.floor_area_ratio %></strong> </div>
+                  <div class="property-card-info text-black"><i class="fa-solid fa-divide" style="color: #000000;"></i> <strong>Coeff d'occupation des sols <%= propertie.floor_area_ratio %></strong> </div>
                   <div class="checkbox-container">
                     <%= check_box_tag 'property_ids[]', propertie.id, class: 'properties-checkbox', data: { action: "change->index-checkboxes#setProjectList" } %>
                   </div>
@@ -225,7 +225,7 @@
                   <!--<div class="property-card-info"><strong><%= propertie.nb_dwelling %></strong> Lot(s)</div>-->
                   <div class="property-card-info text-black"><strong><%= propertie.area_sqm_land %></strong> m² terrain</div>
                   <div class="property-card-info text-black" ><strong><%= propertie.area_sqm_livable %></strong> m² habitables</div>
-                  <div class="property-card-info text-black">Ratio surface de plancher : <strong><%= propertie.floor_area_ratio %></strong></div>
+                  <div class="property-card-info text-black">Coeff d'occupation des sols : <strong><%= propertie.floor_area_ratio %></strong></div>
                 </div>
 
               </div>
