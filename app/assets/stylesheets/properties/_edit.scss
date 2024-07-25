@@ -1,0 +1,85 @@
+.edit-h1 {
+  text-align: center;
+  border-bottom: 5px solid #3BFFDB;
+  width: 360px;
+  margin-left: 37%;
+  padding-top: 40px;
+  font-family: 'Gotham';
+}
+
+.edit-form {
+  width: 40%;
+  position: relative;
+  left: 26%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 20px;
+  margin: 50px;
+}
+
+.edit-input-button {
+  background-color: #27CE8D;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px;
+  text-decoration: none;
+}
+
+
+#property_building_height_floorsg {
+  border-radius: 15px;
+  border: none;
+  width: 25pc;
+  text-align: center;
+  background-color: #dcfff3;
+}
+
+#property_floor_area_ratio {
+  border-radius: 15px;
+  border: none;
+  width: 25pc;
+  text-align: center;
+  background-color: #dcfff3;
+}
+
+#property_area_sqm_livable {
+  border-radius: 15px;
+  border: none;
+  width: 25pc;
+  text-align: center;
+  background-color: #dcfff3;
+}
+
+#property_nb_dwelling {
+  border-radius: 15px;
+  border: none;
+  width: 25pc;
+  text-align: center;
+  background-color: #dcfff3;
+}
+
+#property_area_sqm_land {
+  border-radius: 15px;
+  border: none;
+  width: 25pc;
+  text-align: center;
+  background-color: #dcfff3;
+}
+
+#property_nb_rooms_per_dwelling {
+  border-radius: 15px;
+  border: none;
+  width: 25pc;
+  text-align: center;
+  background-color: #dcfff3;
+}
+
+#property_energy_class {
+  border-radius: 15px;
+  border: none;
+  width: 25pc;
+  text-align: center;
+  background-color: #dcfff3;
+}

@@ -60,6 +60,22 @@ class PropertiesController < ApplicationController
     end
   end
 
+  def edit
+    @property = Property.find(params[:id])
+  end
+
+  def update
+    @property = Property.find(params[:id])
+    @property.update(property_params)
+    redirect_to property_path(property: @property)
+  end
+
+  def destroy
+    @property = Property.find(params[:id])
+    @property.destroy
+    redirect_to properties_path, notice: 'Projet supprimé avec succès'
+  end
+
   private
 
   def property_params # strong params
