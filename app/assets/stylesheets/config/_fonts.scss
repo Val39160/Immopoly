@@ -5,14 +5,14 @@
 
 // Define fonts for body and headers
 $body-font: "Josefin Sans", "sans-serif";
-$headers-font: "GothamBold", "sans-serif";
+$headers-font: "Gotham", "sans-serif";
 
 // To use a font file (.woff) uncomment following lines
 @font-face {
   font-family: "Gotham";
-  src: font-url('GothamBold.eot');
-  src: font-url('GothamBold.eot?#iefix') format('embedded-opentype'),
-       font-url('GothamBold.woff') format('woff'),
-       font-url('GothamBold.ttf') format('truetype');
+  src: font-url('Gotham.eot');
+  src: font-url('Gotham.eot?#iefix') format('embedded-opentype'),
+       font-url('Gotham.woff') format('woff'),
+       font-url('Gotham.ttf') format('truetype');
 }
 $my-font: "Gotham";

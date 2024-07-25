@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <!-- Section 1: Summary of Applicable Regulations -->
     <div class="col-md-6 mb-4 ">
       <div id="regulations-summary" class=" rounded-4 shadow-sm bg-white p-5 m-4 mb-2 custom-project-show-card-height">
-      <h2 class="h2-show-project"><i class="fas fa-gavel"></i> Plan Local d'Urbanisme de <%= @city.city_name.capitalize %></h2>
+      <h2 class="h2-show-project"><i class="fas fa-gavel"></i> Plan local d'urbanisme à <%= @city.city_name.capitalize %></h2>
         <% if @regulations.present? %>
           <% @regulations.each do |regulation| %>
               <button type="button" class="btn btn-lg ml-4 color-black bg-white" data-bs-toggle="popover"  data-bs-content="D'après le PLU de
@@ -33,11 +33,13 @@ document.addEventListener('DOMContentLoaded', function () {
               <!-- Correctly calculated floor area ratio based on updated metrics -->
               <strong><%= number_with_precision(regulation.floor_area_ratio * @project.area_sqm_land, precision: 0, delimiter: ' ') %> m²</strong> </div>
               <div class= "p-show-project mb-2">
-              Coefficient d'occupation des sols (COS) maximal autorisé
-              <strong><%= number_with_precision(regulation.floor_area_ratio * 100, precision: 0, delimiter: ' ') %>%</strong> </div>
+              Coeff. d'occupation des sols maximal autorisé
+              <strong><%= number_with_precision(regulation.floor_area_ratio * 100, precision: 0, delimiter: ' ') %>%</strong>
+              </div>
               <div class= "p-show-project mb-2">
               Nombre maximal de niveaux autorisé
-              <strong><%= regulation.building_height - 1 %> étages</strong>. </div>
+              <strong><%= regulation.building_height - 1 %> étages</strong>.
+              </div>
             </p>
           <% end %>
         <% else %>
@@ -49,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
     <!-- Section 2: City Data -->
     <div class="col-md-6 mb-4 ">
       <div id="city-data" class="rounded-4 shadow-sm bg-white p-5 m-4 pb-5 custom-project-show-card-height">
-      <h2 class="h2-show-project"><i class="fas fa-city"></i> Marché de : <%= @city.city_name.capitalize %></h2>
+      <h2 class="h2-show-project"><i class="fas fa-city"></i> Marché immobilier de <%= @city.city_name.capitalize %></h2>
        <button type="button" class="btn btn-lg ml-4 color-black bg-white" data-bs-toggle="popover"  data-bs-content="Actuellement, à
             <%= @city.city_name.capitalize %>,
             le prix d'achat par m² habitable est de
@@ -86,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <div class= "p-show-project mb-2">
             Taux de rendement brut
             <!-- Added "+" sign and 2 decimal precision for the gross rental yield -->
-            <strong>+<%= number_with_precision((@city.price_per_sqm_rental * @project.area_sqm_livable * 12) / (@city.price_per_sqm_livable * @project.area_sqm_livable) * 100, precision: 2, delimiter: ' ') %>%</strong>.
+            <strong>+<%= number_with_precision((@city.price_per_sqm_rental * @project.area_sqm_livable * 12) / (@city.price_per_sqm_livable * @project.area_sqm_livable) * 100, precision: 2, delimiter: ' ') %>%</strong>
           </div></p>
         <% else %>
           <p>Aucune donnée disponible pour cette ville.</p>
@@ -128,10 +130,10 @@ document.addEventListener('DOMContentLoaded', function () {
     <!-- Section 4: Launch Simulation -->
     <div class="col-md-6 mb-4 ">
       <!-- Updated form_with to reflect correct project path -->
-      <%= form_with(url: project_simulations_path(@project), method: :post, id: "simulation-form", class: "p-3 rounded-4 shadow-sm bg-white p-4 m-4 custom-project-show-card-height") do |form| %>
+      <%= form_with(url: project_simulations_path(@project), method: :post, id: "simulation-form", class: "p-3 rounded-4 shadow-sm bg-white p-5 m-4 custom-project-show-card-height") do |form| %>
       <h2 class="h2-show-project"><i class="fas fa-play-circle"></i> Votre simulation</h2>
         <div class="mb-3">
-          <%= form.label :unit_cost, "Estimer le potentiel immobilier de votre bien en achat ou locatif ainsi que le niveau d'investissement requis en coût de construction / démolition.", class: 'form-simulation-label' %>
+          <%= form.label :unit_cost, "Estimer le potentiel immobilier de votre bien en achat ou locatif ainsi que le niveau d'investissement requis en coût de construction / démolition.", class: 'form-simulation-label mb-3' %>
           <%= form.select :unit_cost, options_for_select([['-- Sélectionnez une option --', ''], ['Basique - 1 500€', 1500], ['Standard - 2 000€', 2000], ['Haut de gamme - 2 500€', 2500]]), {}, { class: 'form-select', id: 'unit_cost' } %>
         </div>
         <div class="bouton-simulation-launch-center"> <!-- Centre le bouton -->
