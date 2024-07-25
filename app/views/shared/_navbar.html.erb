@@ -13,17 +13,16 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to current_user.first_name, "#", class: "nav-link" %>
+          <li class="nav-item active mr-2 mt-2">
+            <p><strong><%= link_to current_user.first_name, "#", class: "nav-link" %></strong></p>
           </li>
 
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown mt-3">
           <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
+            <i class="fa-solid fa-user-tie fa-2xl" style="color: #000000; "></i>
           </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%= link_to "Another action", "#", class: "dropdown-item" %>
+              <%= link_to "Tableau de bord", dashboard_path, class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
             </div>
           </li>
