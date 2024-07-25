@@ -19,12 +19,9 @@ class ProjectsController < ApplicationController
     properties = params[:property_ids].map do |property_id|
       Property.find(property_id)
     end
-    @project = Project.create(user: current_user, properties: properties)
+    @project = Project.create(user: current_user, properties: properties, project_name: params[:project][:project_name])
     update_metrics(@project)
       redirect_to project_path(@project), notice: 'Projet sauvegardé avec succès'
-  end
-
-  def edit
   end
 
   def update
