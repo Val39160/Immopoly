@@ -15,11 +15,21 @@
 @import "properties/new";
 @import "properties/show";
 @import "properties/info_window";
+@import "projects/show";
 
 
 h1 {
   font-family: 'GothamBold', sans-serif;
 }
+
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 20vh;
+}
+
+
 
 .footer {
   background-color: #3F3F3F; /* Couleur de fond du footer */
@@ -27,6 +37,10 @@ h1 {
   text-align: center; /* Centre le texte */
   position: relative;
   width: 100%;
+  min-height: 15vh;
+  max-height: 15vh;
+  margin-top: auto; /* Pousse le footer vers le bas */
+  flex : 1;
 }
 
 .footer-content {
@@ -35,6 +49,7 @@ h1 {
   align-items: center; /* Center vertically */
   max-width: 1200px; /* Optional: Limit width of footer content */
   margin: 0 auto; /* Center the footer content horizontally */
+
 }
 
 .footer-logo img {
@@ -48,7 +63,7 @@ h1 {
 
 .footer-links li {
   display: inline; /* Affiche les liens en ligne */
-  margin: 0 30px 0 30px; /* Ajoute de l'espacement horizontal entre les liens */
+  margin: 0 30px; /* Ajoute de l'espacement horizontal entre les liens */
 }
 
 .footer-links a {
