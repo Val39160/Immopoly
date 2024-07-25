@@ -1,0 +1,48 @@
+.simulation-container {
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 40px;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #3F3F3F;
+  }
+}
+
+.simulation-row {
+  display: flex;
+  width: 100%;
+  margin-bottom: 20px; /* Adds space between rows */
+}
+
+.simulation-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center content vertically */
+  padding: 10px;
+  border: 1px solid #ddd; /* Lighter border for a cleaner look */
+  border-radius: 5px; /* Rounded corners */
+  background-color: #f9f9f9; /* Light background for better readability */
+}
+
+.simulation-col-1 {
+  flex: 1;
+  max-width: 25%; /* Ensures it takes 1/4th of the container width */
+  margin-right: 10px; /* Adds space between columns */
+}
+
+.simulation-col-2 {
+  flex: 3;
+  max-width: 75%; /* Ensures it takes 3/4th of the container width */
+}
+
+.simulation-col p {
+  margin: 5px 0;
+}
+
+.simulation-container .btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+}
