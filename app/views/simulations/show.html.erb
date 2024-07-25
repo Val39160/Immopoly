@@ -20,7 +20,7 @@
     <div class="simulation-col simulation-col-2">
       <p>
         <strong><%= price_total_rental = number_with_precision(@simulation.price_total_rental, precision: 0, delimiter: ' ') %>€</strong>
-        en valeur locative annualisée soit un taux de rendement brut de <strong><%= rental_return_simul %>%</strong>
+        en valeur locative annualisé soit un taux de rendement brut de <strong><%= rental_return_simul %>%</strong>
         contre <%= rental_return_project = number_with_precision((@city.price_per_sqm_rental * 12) / @city.price_per_sqm_livable * 100, precision: 2, delimiter: ' ') %>% initialement !
       </p>
     </div>
@@ -61,7 +61,7 @@
 
   <!-- Action Buttons -->
   <div class="d-flex justify-content-between mt-4">
-    <%= link_to 'Retour au Projet', project_path(@simulation.project), class: 'btn btn-primary' %>
+    <%= link_to 'Retour au Projet', project_path(@simulation.project), class: 'btn btn-primary return-to-dashboard-button' %>
     <%= form_with model: [@simulation.project, @simulation], url: save_project_simulation_path(@simulation.project, @simulation), method: :post, local: true do |form| %>
       <%= form.hidden_field :area_sqm_livable %>
       <%= form.hidden_field :price_total_livable %>
