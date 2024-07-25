@@ -1,7 +1,7 @@
 /* app/assets/stylesheets/pages/_home.scss */
 
 .headline {
-  font-size: 50px;
+  font-size: 40px;
   font-weight: 700;
   color: #27CE8D;
   text-align: left; /* Ensure the headline text is aligned to the left */
@@ -12,7 +12,8 @@
 .sub-headline{
   color: #3F3F3F;
   text-align: left; /* Ensure the sub-headline text is aligned to the left */
-  margin: 0; /* Remove default margin */
+  margin-left: 0; /* Remove default margin */
+  font-size: 20px;
 }
 
 #banner-container {
@@ -27,9 +28,10 @@
   flex: 1;
   display: flex;
   justify-content: center; /* Center content horizontally */
-  align-items: center; /* Center content vertically */
+  align-items: flex-start; /* Center content vertically */
   padding: 40px; /* Optional padding */
   flex-direction: column;
+  margin-left: 30px;
 }
 
 .banner-right-content {
