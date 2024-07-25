@@ -78,3 +78,6 @@ end
 
 gem 'httparty'
 gem 'geocoder'
+gem 'aws-sdk', '~> 3.2.0'
+gem 'aws-sdk-core', '~> 3.201.3'
+gem 'aws-sdk-locationservice', '~> 1.4.0'

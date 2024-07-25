@@ -9,6 +9,14 @@ class ProjectsController < ApplicationController
     @properties = @project.properties
     @city = @properties.first&.city
     @regulations = @city&.regulations if @city.present?
+    @markers = @properties.geocoded.map do |property|
+      {
+        lat: property.latitude,
+        lng: property.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: {property: property}),
+
+      }
+    end
   end
 
   def new
