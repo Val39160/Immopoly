@@ -1,10 +1,10 @@
 
 .mapboxgl-popup {
-  max-width: 250px; /* Augmentez la largeur si nécessaire */
-  max-height: 300px; /* Augmentez la hauteur si nécessaire */
+  max-width: 300px; /* Augmentez la largeur si nécessaire */
+  max-height: 350px; /* Augmentez la hauteur si nécessaire */
   background-color: white;
   border-radius: 10px; /* Coins arrondis */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); ; /* Ombre plus marquée */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);/* Ombre plus marquée */
   font-family: 'Gotham', sans-serif;
   padding: 10px; /* Espacement interne */
   overflow: auto; /* Ajoute un défilement si le contenu dépasse la taille */
