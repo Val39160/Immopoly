@@ -20,8 +20,8 @@ class SimulationsController < ApplicationController
     # Create the simulation with calculated values
     @simulation = @project.simulations.new(
       area_sqm_livable: area_sqm_livable,
-      price_total_livable: (city.price_per_sqm_livable * 1.23) * area_sqm_livable, # +23% for livable improvement
-      price_total_rental: (city.price_per_sqm_rental * 1.28) * area_sqm_livable * 12, # +28% for rental improvement
+      price_total_livable: city.price_per_sqm_livable * area_sqm_livable * 1.23,
+      price_total_rental: city.price_per_sqm_rental * area_sqm_livable * 12 * 1.28,
       cost_destruction: cost_destruction,
       area_sqm_land: area_sqm_land,
       floor_area_ratio: regulation.floor_area_ratio,
@@ -38,7 +38,8 @@ class SimulationsController < ApplicationController
   end
 
   def show
-    # This action should only display the simulation
+    # city = City.find(@project.properties.first.city_id)
+    # @regulation = Regulation.find_by(city: city)
   end
 
   def save
