@@ -20,8 +20,8 @@ class SimulationsController < ApplicationController
     # Create the simulation with calculated values
     @simulation = @project.simulations.new(
       area_sqm_livable: area_sqm_livable,
-      price_total_livable: city.price_per_sqm_livable * area_sqm_livable,
-      price_total_rental: city.price_per_sqm_rental * area_sqm_livable * 12,
+      price_total_livable: (city.price_per_sqm_livable * 1.23) * area_sqm_livable, # +23% for livable improvement
+      price_total_rental: (city.price_per_sqm_rental * 1.28) * area_sqm_livable * 12, # +28% for rental improvement
       cost_destruction: cost_destruction,
       area_sqm_land: area_sqm_land,
       floor_area_ratio: regulation.floor_area_ratio,

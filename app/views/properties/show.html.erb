@@ -1,4 +1,4 @@
-<div class="container">
+<div class="property-container">
   <div>
     <h1 class="property-show-h1">Votre propriété en détails</h1>
   </div>
@@ -15,35 +15,37 @@
     </div>
 
     <!-- Formulaire des propriétés -->
-    <div class="card-simple-form ms-4 mb-5" style="width: 40%;">
-      <h3 class="title-property-form"><%= @property.address %></h3>
-      <div class="property-form">
-            <div class="info-box" style="background-color: #DCFFF3">
-            <p>Surface terrain</p> <%= number_with_precision(@property.area_sqm_land, precision: 0, delimiter: ',') %> m²
-            </div>
-            <div class="info-box" style="background-color: #DCFFF3">
-            <p>Nombre d'étages</p> <%= @property.building_height_floors %>
-            </div>
-            <div class="info-box" style="background-color: #DCFFF3">
-            <p>Nombre de pièces par logement</p> <%= @property.nb_rooms_per_dwelling %>
-            </div>
-            <div class="info-box" style="background-color: #DCFFF3">
-            <p>Classe énergétique</p> <%= @property.energy_class %>
-            </div>
-            <div class="info-box" style="background-color: #DCFFF3">
-            <p>Coefficient d'occupation des sols</p> <%= @property.floor_area_ratio %>
-            </div>
-            <div class="info-box" style="background-color: #DCFFF3">
-            <p>Nombre de logements</p> <%= @property.nb_dwelling %>
-            </div>
-            <div class="info-box" style="background-color: #DCFFF3">
-            <p>Zone de densité</p> <%= @property.density_area %>
-            </div>
-            <div class="last-info-box" style="background-color: #DCFFF3">
-            <p>Zone à bâtir</p> <%= @property.building_zone %>
-            </div>
+    <div class="dashboard-property-box ms-4 mb-5">
+      <h3 class="property-show-address"><%= @property.address %></h3>
+      <div class="property-info-container">
+        <div class="info-box" style="background-color: #DCFFF3">
+          <p>Surface terrain</p> <%= number_with_precision(@property.area_sqm_land, precision: 0, delimiter: ',') %> m²
+        </div>
+        <div class="info-box" style="background-color: #DCFFF3">
+          <p>Nombre d'étages</p> <%= @property.building_height_floors %>
+        </div>
+        <div class="info-box" style="background-color: #DCFFF3">
+          <p>Nombre de pièces par logement</p> <%= @property.nb_rooms_per_dwelling %>
+        </div>
+        <div class="info-box" style="background-color: #DCFFF3">
+          <p>Classe énergétique</p> <%= @property.energy_class %>
+        </div>
+        <div class="info-box" style="background-color: #DCFFF3">
+          <p>Coefficient d'occupation des sols</p> <%= @property.floor_area_ratio %>
+        </div>
+        <div class="info-box" style="background-color: #DCFFF3">
+          <p>Nombre de logements</p> <%= @property.nb_dwelling %>
+        </div>
+        <div class="info-box" style="background-color: #DCFFF3">
+          <p>Zone de densité</p> <%= @property.density_area %>
+        </div>
+        <div class="last-info-box" style="background-color: #DCFFF3">
+          <p>Zone à bâtir</p> <%= @property.building_zone %>
+        </div>
+        <div class="return-to-dashboard-button">
+          <%= link_to 'Retourner au dashboard', dashboard_path(current_user), class: "button-return"%>
+        </div>
       </div>
-      <%= link_to 'Retourner au dashboard', dashboard_path(current_user), class: 'return-to-dashboard-button'%>
     </div>
   </div>
 </div>

@@ -12,7 +12,18 @@
   background-color: white;
   border-radius: 10px;
   padding: 20px;
-  height: 360px;
+  height: 335px;
+  border: 2px solid #E5E5E5;
+  list-style: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-property-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 7px;
+  height: 225px;
   border: 2px solid #E5E5E5;
   list-style: none;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -36,19 +47,22 @@
 
 .carousel-control-prev {
   padding-right: 130px;
-  margin-top: 277px;
+  margin-top: 292px;
+  margin-bottom: 50px;
 }
 
 .carousel-control-next {
   padding-left: 130px;
-  margin-top: 277px;
+  margin-top: 292px;
+  margin-bottom: 50px;
 }
+
 
 .dashboard-h1 {
   text-align: center;
   border-bottom: 5px solid #3BFFDB;
   width: 360px;
-  margin-left: 40%;
+  margin-left: 37%;
   padding-top: 40px;
   font-family: 'Gotham';
 }
@@ -70,6 +84,16 @@
   border-bottom: 2px solid #E5E5E5;
 }
 
+.dashboard-project-details-button {
+  background-color: #27CE8D;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px;
+  text-decoration: none;
+  font-size: 18px;
+}
 
 .dashboard-details-button {
   background-color: #27CE8D;
@@ -116,7 +140,7 @@
 
 .dashboard-simulation {
   margin-top: 25px;
-  font-size: 24px;
+  font-size: 22px;
   font-family: 'josefin sans';
 }
 

@@ -31,4 +31,6 @@ Rails.application.routes.draw do
   end
 
   get 'addresses/autocomplete', to: 'addresses#autocomplete'
+  delete "projects/:id", to: "projects#destroy"
+  delete "properties/:id", to: "properties#destroy"
 end

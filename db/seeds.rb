@@ -15,15 +15,15 @@ City.destroy_all
 cities = City.create!([
   {
     city_name: 'vannes',
-    price_per_sqm_livable: 3815,
+    price_per_sqm_livable: 3107,
     price_per_sqm_land: 763,
-    price_per_sqm_rental: 13
+    price_per_sqm_rental: 10.3
   },
   {
     city_name: 'villejuif',
-    price_per_sqm_livable: 6409,
+    price_per_sqm_livable: 3452,
     price_per_sqm_land: 1282,
-    price_per_sqm_rental: 22
+    price_per_sqm_rental: 15
   }
 ])
 
