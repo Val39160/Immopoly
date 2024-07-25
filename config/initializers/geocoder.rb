@@ -1,7 +1,16 @@
 Geocoder.configure(
   # Geocoding options
-  # timeout: 3,                 # geocoding service timeout (secs)
-  # lookup: :nominatim,         # name of geocoding service (symbol)
+  #timeout: 3,                 # geocoding service timeout (secs)
+  lookup: :amazon_location_service,
+  amazon_location_service: {
+    index_name: 'ImmopolyIndex',
+    api_key: {
+      region: ENV['AWS_REGION'],
+      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+    }
+  }
+)        # name of geocoding service (symbol)
   # ip_lookup: :ipinfo_io,      # name of IP address geocoding service (symbol)
   # language: :en,              # ISO-639 language code
   # use_https: false,           # use HTTPS for lookup requests? (if supported)
@@ -16,7 +25,7 @@ Geocoder.configure(
   # always_raise: [],
 
   # Calculation options
-  units: :km,                 # :km for kilometers or :mi for miles
+  #units: :km,                 # :km for kilometers or :mi for miles
   # distances: :linear          # :spherical or :linear
 
   # Cache configuration
@@ -24,4 +33,3 @@ Geocoder.configure(
   #   expiration: 2.days,
   #   prefix: 'geocoder:'
   # }
-)
